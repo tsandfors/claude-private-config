@@ -44,7 +44,8 @@ detsamma — jobbets 94 minnen hör inte hit.
 - [Verifiering hör till leveransen](verifiering-hor-till-leveransen.md) — tester i samma svep som koden; luckor sägs högt i första meningen
 - [En backup säger inte vad som blev kvar](backup-svarar-inte-pa-vad-som-blev-kvar.md) — mät den kvarvarande sidan efter en städning, inte den borttagna
 - [Tystnad är tvetydig](tystnad-ar-tvetydig.md) — fråga vad en kontroll jämför mot; evig tystnad och evigt larm ser båda ut som ett fungerande larm
-- [Ett grönt test bevisar inget i sig](gront-test-bevisar-inget-i-sig.md) — kör mutationen; och en fixtur med ett exemplar mäter inte en regel om flera
+- [Ett grönt test bevisar inget i sig](gront-test-bevisar-inget-i-sig.md) — kör mutationen; mät också utan ändringen; en fixtur med ett exemplar mäter inte en regel om flera
+- [Dokumentationen av en sanering läcker](dokumentationen-av-en-sanering-lacker.md) — att beskriva en borttagen sträng återinför den; kontrollera diffen, inte arbetsträdet
 
 ## att-gora
 
