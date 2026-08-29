@@ -1,0 +1,26 @@
+# Whitelist och inte blacklist, och det är hela poängen med filen.
+#
+# Katalogen är Claude Codes state-katalog för privata sessioner: 64 MB, varav det mesta är
+# sessionstranskript, prompthistorik, filsnapshots och cache. Ingenting av det ska till en
+# remote -- transkripten bär varje prompt och varje svar ordagrant. En blacklist hade behövt
+# utökas varje gång harnesset börjar lägga en ny fil här, och den utökningen skulle glömmas
+# tyst. Det som ignoreras av misstag märks aldrig; det som committas av misstag går inte att
+# ta tillbaka.
+*
+
+!.gitignore
+!README.md
+!repos.txt
+!settings.example.json
+
+!bin/
+!bin/**
+
+!memory/
+!memory/**
+
+# Den riktiga settings.json är redan ignorerad av `*` ovan. Raden står här ändå, för avsikten
+# ska gå att läsa utan att härledas: filen bär arbetsgivarens GCP-projektnamn och
+# hemkatalogens absoluta sökväg, och får därför inte versionshanteras. settings.example.json
+# är den committade motsvarigheten.
+settings.json

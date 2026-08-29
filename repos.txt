@@ -1,0 +1,2 @@
+# Privata repon. Ett per rad. Giltiga scope-värden utöver "global".
+att-gora
