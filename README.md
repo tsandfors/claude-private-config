@@ -52,6 +52,18 @@ globen `**/.claude/CLAUDE.md` – den senare hade tystat framtida privata repons
 5. Verifiera: `python3 bin/check-memory.py` ska ge exit 0, och statusraden ska visa
    `● privat` längst till vänster.
 
+## Kör aldrig `git clean` här
+
+Det följer av att arbetskatalogen är en state-katalog: nästan allt i den är **ignorerat och
+otrackat**, vilket är precis vad `git clean -fdx` finns för att ta bort. Ett kommando som i ett
+vanligt repo betyder "städa bort skräp" betyder här *radera `settings.json`, hela `memory/`s
+oskrivna ändringar, samtliga sessionstranskript, prompthistoriken och cachen*. Ingenting av det
+går att få tillbaka, och `settings.json` finns inte på remoten.
+
+Samma varning gäller `git checkout .` och `git reset --hard` i mindre grad – de rör bara
+spårade filer, men `bin/` och `memory/` är spårade och en oskriven minnesfil är borta lika
+tyst.
+
 ## Vad som medvetet inte ligger här
 
 - **`CLAUDE.md`** – den privata användarfilen. Den bär i dag en referens till jobbets
