@@ -6,7 +6,7 @@ metadata:
   type: feedback
   scope: global
   originSessionId: fb4d44ef-2587-41d6-803b-254d0535d248
-  modified: 2026-08-29T04:41:07.524Z
+  modified: 2026-08-29T04:48:50.495Z
 ---
 
 Att ta bort en sträng och att **beskriva** att man tagit bort den är två handlingar, och den
@@ -32,6 +32,16 @@ städats: `git diff --cached | grep -E '<strängarna>'` före varje commit i en 
 togs bort: beskriv strängen i stället för att citera den – "jobbets GitHub Enterprise-värd", inte
 värden. Och misstänk särskilt commit-meddelanden, README-avsnitt och statusrapporter, som alla är
 texter vars kvalitet mäts i hur konkreta de är.
+
+**Det starkaste beviset kom av att minnet inte hjälpte.** Det här minnet skrevs, och inom några
+minuter gjorde jag felet två gånger till – i ett CLAUDE.md-stycke och i två commit-meddelanden,
+i samma sanering. Fyra instanser på en dag, varav de sista efter att lärdomen var nedskriven och
+färsk. Det som fångade varenda en var `git diff --cached | grep`, aldrig min vaksamhet.
+
+Slutsatsen är därför inte "var mer uppmärksam" utan att den här sortens fel **inte går att
+minnas bort**: reflexen att citera exakt är samma reflex som skriver bra dokumentation, och den
+går inte att stänga av selektivt. Kör kontrollen. Se [[instruktion-ar-ingen-sparr]] – det är
+samma insikt i allmän form, och det här är dess dyraste belägg.
 
 Nära [[backup-svarar-inte-pa-vad-som-blev-kvar]], men spegelvänt: det minnet handlar om vad som
 blev **kvar** efter en städning, det här om vad jag **lade till** under den. Se även
