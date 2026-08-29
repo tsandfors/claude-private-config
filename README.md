@@ -13,6 +13,7 @@ remote – sessionstranskript, prompthistorik, filsnapshots, cache – och det �
 
 | | |
 |---|---|
+| `CLAUDE.md` | Användarnivåns instruktioner för privata sessioner: dagsavslutet, Obsidian-rutinen. |
 | `bin/statusline.sh` | Statusraden. Vakt, version, modell, kontext, kostnad, sökväg, git. |
 | `bin/claude-version-check.sh` | Hämtar senaste versionen detached, max var sjätte timme, till `cache/`. |
 | `bin/session-start-orientation.sh` | `SessionStart`-hook: injicerar projektets *Var man börjar* ur `BACKLOG.md`. |
@@ -66,10 +67,19 @@ tyst.
 
 ## Vad som medvetet inte ligger här
 
-- **`CLAUDE.md`** – den privata användarfilen. Den bär i dag en referens till jobbets
-  GitHub-värd i klartext och faller därför på samma test som `settings.json`. Skrivs den raden
-  om i generella termer kan filen tas med.
 - **Sessionsdata i alla former.** Se `.gitignore`.
+
+`CLAUDE.md` stod här fram till 2026-08-29. Den bar då jobbets GitHub Enterprise-värd i klartext och föll
+på samma test som `settings.json`; raden är omskriven i generella termer och filen är med.
+Kontrollen före den togs in var bredare än den strängen: inga absoluta hemkatalogsökvägar, inga
+e-postadresser, inga jobbnamn. **Gör om det svepet innan filen ändras**, för den är den enda
+committade filen här som är löpande prosa om jobbet och därmed den lättaste att råka namnge
+något i.
+
+En sak till, upptäckt genom att kontrollen fällde den här filen: **att beskriva en sträng man
+tagit bort återinför den.** Meningen ovan namngav först värden den säger att vi slutat namnge,
+och det hade gått igenom om den negativa kontrollen inte körts på den *staged diffen* i stället
+för på arbetsträdet. Samma misstag gjordes två gånger samma dag, i två olika repon.
 
 ## Skotten mot jobbet
 

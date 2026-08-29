@@ -10,6 +10,7 @@
 
 !.gitignore
 !README.md
+!CLAUDE.md
 !repos.txt
 !settings.example.json
 
