@@ -100,6 +100,21 @@ claude() {
 # finns för att hindra - och ett fel som aldrig kan inträffa hade inte varit
 # värt en rad.
 #
+# Vägran döms på tokenens *värde* och inte på filens storlek, och den skillnaden
+# kostade en 403 att lära sig 2026-09-06. Villkoret var `[[ ! -s $fil ]]`, alltså
+# "har filen bytes?" - och en fil som bara innehöll en radbrytning är 1 byte och
+# passerade. `$(<...)` klipper i sin tur bort avslutande radbrytningar, så
+# GH_TOKEN blev tomma strängen, och en tom GH_TOKEN behandlar gh som osatt: den
+# gick vidare till nyckelringen och autentiserade som jobbets github.com-konto.
+# Alltså precis det tysta fallback stycket ovan påstår är omöjligt.
+#
+# Att det upptäcktes var en tillfällighet: jobbets konto är suspenderat och
+# svarade 403. Hade det varit friskt hade kommandot lyckats under fel identitet
+# utan ett ord. Läxan är den om `claude-latest` i ny skepnad - kontrollen satt på
+# en egenskap bredvid saken, storleken i stället för innehållet. Ett prefixprov
+# på `github_pat_` vore möjligt ovanpå men är medvetet inte gjort: GitHub har
+# lagt till tokenformat förr, och en lista över giltiga prefix ruttnar tyst.
+#
 # gh flyttade medvetet *inte* till chpwd som claude gjorde 2026-09-05, och
 # skälen är två. GH_TOKEN i den exporterade miljön hade legat i varje
 # barnprocess i hela projektträdet i stället för i ett enda kommandos miljö, och
@@ -110,7 +125,10 @@ claude() {
 gh() {
   if [[ "$PWD" == "$HOME/ts_projects/att-gora"* ]]; then
     local gh_token_file="$HOME/.claude-private/gh/token"
-    if [[ ! -s "$gh_token_file" ]]; then
+    local gh_token=""
+    [[ -r "$gh_token_file" ]] && gh_token="$(<"$gh_token_file")"
+    gh_token="${gh_token//[[:space:]]/}"
+    if [[ -z "$gh_token" ]]; then
       print -u2 "gh: ingen privat token i $gh_token_file."
       print -u2 "    Vägrar köra, eftersom alternativet är jobbets konto."
       print -u2 "    Så skapas och skrivs en ny: att-gora/CLAUDE.md, Täta skott mot jobbet."
@@ -118,7 +136,7 @@ gh() {
     fi
     GH_CONFIG_DIR="$HOME/.claude-private/gh" \
     GH_HOST="github.com" \
-    GH_TOKEN="$(<"$gh_token_file")" \
+    GH_TOKEN="$gh_token" \
       command gh "$@"
   else
     command gh "$@"
