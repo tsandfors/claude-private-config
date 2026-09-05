@@ -20,8 +20,20 @@
 !memory/
 !memory/**
 
+# Skalfunktionerna för de privata projekten, sourcade från ~/.zshrc. De låg där
+# och ingen annanstans fram till 2026-09-05, alltså utan historik och utan kopia.
+!shell/
+!shell/**
+
 # Den riktiga settings.json är redan ignorerad av `*` ovan. Raden står här ändå, för avsikten
 # ska gå att läsa utan att härledas: filen bär arbetsgivarens GCP-projektnamn och
 # hemkatalogens absoluta sökväg, och får därför inte versionshanteras. settings.example.json
 # är den committade motsvarigheten.
 settings.json
+
+# gh/ är gh:s isolerade konfigkatalog, och gh/token är en personal access token i klartext.
+# Bägge är redan ignorerade av `*`, och raderna står här av samma skäl som den ovan -- men
+# den här är den enda i filen som bär en riktig hemlighet, så den ska vara omöjlig att missa.
+# Whitelisten är det som skyddar den; lägg aldrig till `!gh/`.
+gh/
+gh/token

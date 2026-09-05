@@ -3,7 +3,9 @@
     "CLAUDE_CODE_USE_VERTEX": "1",
     "CLOUD_ML_REGION": "global",
     "ANTHROPIC_VERTEX_PROJECT_ID": "<gcp-projekt-id>",
-    "CLAUDE_BASH_MAINTAIN_PROJECT_WORKING_DIR": "1"
+    "CLAUDE_BASH_MAINTAIN_PROJECT_WORKING_DIR": "1",
+    "GH_CONFIG_DIR": "<absolut sökväg till ~/.claude-private/gh>",
+    "GH_HOST": "github.com"
   },
   "theme": "dark",
   "claudeMdExcludes": [
