@@ -34,6 +34,7 @@ detsamma — jobbets 94 minnen hör inte hit.
 - [Korrigera, inte bara komplettera](korrigera-inte-bara-komplettera.md) — gör ett motsägelsesvep före "klart"; riv upp gamla påståenden, lägg inte bara till
 - [En instruktion är ingen spärr](instruktion-ar-ingen-sparr.md) — bruten rutin flyttas till harnesset, inte skrivs om tydligare
 - [Ett fel sitter sällan ensamt](ett-fel-sitter-sallan-ensamt.md) — greppa efter mönstret så fort jag kan formulera det; börja i filen jag står i
+- [Räkna omfattningen före spec](rakna-omfattningen-fore-spec.md) — ett önskemål gäller ofta färre ställen än det låter, och siffran ändrar vad det betyder
 
 ## Git
 

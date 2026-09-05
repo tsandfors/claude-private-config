@@ -4,9 +4,8 @@ description: En rutin som står i en kontextfil hoppas över förr eller senare;
 metadata:
   type: feedback
   originSessionId: cc180170-0edd-405f-8317-e200404cdef7
-  modified: 2026-08-28T01:45:00.000Z
   scope: global
-  modified: 2026-08-28T01:41:11.373Z
+  modified: 2026-09-04T09:00:31.188Z
 ---
 
 En instruktion i en `CLAUDE.md` är en påminnelse jag kan glömma, inte en spärr. 2026-08-28
@@ -30,6 +29,19 @@ hoppar över något** – en tyst avkortning läses som att allt kom med.
 
 Bevaka gränsen åt andra hållet också: en spärr som injicerar sammanhang kostar tokens i varje
 session. Injicera **sektionen och inte filen** när skillnaden är 4 kB mot 65.
+
+**Och räkna med att prosan visar sig vara fel när den ska bli en spärr.** 2026-08-30 gjordes två
+förbud i samma `CLAUDE.md` till en `PreToolUse`-hook. Det ena löd *"kör aldrig pytest, python
+eller manage.py direkt på värden"* – men två andra regler i samma fil **kräver** host-python: ett
+python-heredoc för stora textändringar, och minnesstorens egen kontroll. En spärr byggd som
+meningen stod hade brutit bägge sin första dag. En regel i prosa är ofta för brett skriven, och
+**det märks aldrig så länge ingen försöker upprätthålla den** – ingen läser en instruktion och
+frågar sig om den är sann i varje hörn, men en spärr tvingar fram exakt den frågan. Så första
+frågan när prosa ska bli kod är inte *hur kodar jag den* utan **är den sann som den står?**
+
+Spärren ska dessutom bevisas med en mutation, inte med gröna fall. Samma dag: 43 provfall gav noll
+fel på första körningen, och åtta muterade kopior av skriptet avslöjade två riktiga buggar i det –
+varav en gren som inget prov kunde nå. Se [[gront-test-bevisar-inget-i-sig]].
 
 Det här är samma läxa som [[korrigera-inte-bara-komplettera]] slutar med – gör kontrollen
 mekanisk i stället för till en vana – men upptäckt från andra hållet: där var det ett påstående
