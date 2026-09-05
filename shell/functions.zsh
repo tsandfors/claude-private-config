@@ -54,6 +54,7 @@ gh() {
     if [[ ! -s "$gh_token_file" ]]; then
       print -u2 "gh: ingen privat token i $gh_token_file."
       print -u2 "    Vägrar köra, eftersom alternativet är jobbets konto."
+      print -u2 "    Så skapas och skrivs en ny: att-gora/CLAUDE.md, Täta skott mot jobbet."
       return 1
     fi
     GH_CONFIG_DIR="$HOME/.claude-private/gh" \
