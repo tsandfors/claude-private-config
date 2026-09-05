@@ -36,6 +36,7 @@ detsamma — jobbets 94 minnen hör inte hit.
 - [Ett fel sitter sällan ensamt](ett-fel-sitter-sallan-ensamt.md) — greppa efter mönstret så fort jag kan formulera det; börja i filen jag står i
 - [Räkna omfattningen före spec](rakna-omfattningen-fore-spec.md) — ett önskemål gäller ofta färre ställen än det låter, och siffran ändrar vad det betyder
 - [En vakt på namnet täcker inte saken](en-vakt-pa-namnet-tacker-inte-saken.md) — räkna ingångarna till det som skyddas, inte sätten jag brukar nå det
+- [En kompensation kan dölja ett fel](en-kompensation-kan-dolja-ett-fel.md) — klampningar och toleranser maskerar; prova också i läget där de inte gäller
 
 ## Git
 
