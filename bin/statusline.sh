@@ -119,9 +119,10 @@ fi
 INSTALLED=""
 CASK=""
 STABLE=""
+LATEST=""
 # IFS='|' and not a tab: tab is IFS whitespace and a run of them collapses, so an empty
 # field would shift every later value one slot to the left.
-[ -s "$CACHE" ] && IFS='|' read -r INSTALLED CASK STABLE < "$CACHE"
+[ -s "$CACHE" ] && IFS='|' read -r INSTALLED CASK STABLE LATEST < "$CACHE"
 
 # newer <a> <b> -- true when b sorts above a. sort -V and not a string compare: 2.1.24 is
 # older than 2.1.231, while as text it looks newer because 4 beats 3 on the fifth character.
@@ -130,18 +131,35 @@ newer() {
         [ "$(printf '%s\n%s\n' "$1" "$2" | sort -V | tail -1)" = "$2" ]
 }
 
+# Everything below compares against $VERSION, the version the harness says is *running*. That
+# is the 2026-09-06 fix and it is the whole point: until then the subject of all three
+# comparisons was $INSTALLED, Homebrew's cask -- a binary that on this machine nobody starts.
+# Measured that day: running 2.1.263 from ~/.local/bin, cache "2.1.236|2.1.236|2.1.236", every
+# comparison false, segment silent. Not silent because there was nothing to say, silent because
+# it was asking about the wrong object, and it would never have said anything again.
+#
+# Which channel applies is read out of the data rather than configured. A version above stable
+# can only have come from the `latest` channel, so that is the yardstick; anything else is a
+# stable install. That keeps the old trap shut -- comparing a stable install against `latest`
+# lights the segment permanently -- without a setting that goes stale the day the install
+# changes, which is exactly how the previous version broke.
+CHANNEL="$STABLE"
+newer "$STABLE" "$VERSION" && CHANNEL="$LATEST"
+
 # Three states, each naming exactly one thing to do -- and in the order you would do them.
-# Brew first, because that is the only one that is actionable right now. Then the restart,
-# which is what an upgrade leaves behind. Last, and only when the other two are quiet, the
-# news that the stable channel has moved on without the cask: nothing to do, so it stays gray
-# and does not name a command. `brew upgrade` would not fetch it, and pointing at a command
-# that cannot help is the thing this codebase keeps deciding not to do.
-if newer "$INSTALLED" "$CASK"; then
-    segments+=("${BOLD}${YELLOW}${RESET} ${YELLOW}brew: ${CASK}${RESET}")
-elif newer "$VERSION" "$INSTALLED"; then
+# The restart comes first now: when brew has just been upgraded, INSTALLED and CASK are both
+# ahead of the running version, and the useful sentence is the one about the binary already on
+# disk rather than the one telling you to fetch it again. Then brew, the only state that is
+# actionable right now. Last, and only when the other two are quiet, the news that the channel
+# has moved on: nothing to do, so it stays gray and does not name a command. `brew upgrade`
+# would not fetch it, and pointing at a command that cannot help is the thing this codebase
+# keeps deciding not to do.
+if newer "$VERSION" "$INSTALLED"; then
     segments+=("${CYAN}⟳ starta om för ${INSTALLED}${RESET}")
-elif newer "$INSTALLED" "$STABLE"; then
-    segments+=("${GRAY} ${STABLE} ute${RESET}")
+elif newer "$VERSION" "$CASK"; then
+    segments+=("${BOLD}${YELLOW}${RESET} ${YELLOW}brew: ${CASK}${RESET}")
+elif newer "$VERSION" "$CHANNEL"; then
+    segments+=("${GRAY} ${CHANNEL} ute${RESET}")
 fi
 
 # --- model and effort -----------------------------------------------------------------
