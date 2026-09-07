@@ -14,6 +14,12 @@
 !repos.txt
 !settings.example.json
 
+# Skotten mot jobbet i sin helhet -- skälen, mätningarna och felen som hittades på vägen.
+# Texten låg i att-gora/CLAUDE.md fram till 2026-09-06 och hör hemma här: den beskriver den
+# här katalogen och gäller varje privat repo, alltså precis vad undantagstestet säger inte
+# ska bo i ett av dem. Reglerna står kvar i projektfilen.
+!SKOTT.md
+
 !bin/
 !bin/**
 
