@@ -38,6 +38,8 @@ detsamma — jobbets 94 minnen hör inte hit.
 - [En vakt på namnet täcker inte saken](en-vakt-pa-namnet-tacker-inte-saken.md) — räkna ingångarna till det som skyddas, inte sätten jag brukar nå det
 - [En kompensation kan dölja ett fel](en-kompensation-kan-dolja-ett-fel.md) — klampningar och toleranser maskerar; prova också i läget där de inte gäller
 - [Obemärgat arbete är osynligt](obemargat-arbete-ar-osynligt.md) — svep efter obemärgade brancher innan jag skriver om något; frånvaro har ingen representation
+- [Mät takten, inte bara nivån](mat-takten-inte-bara-nivan.md) — ett tak som nås av något som växer är ingen städuppgift; läs tillväxten ur historiken
+- [Mina uppslag rankas inte](mina-uppslag-rankas-inte.md) — egna idéer sägs i samtalet, aldrig i användarens kö; placeringen slår brasklappen
 
 ## Git
 
