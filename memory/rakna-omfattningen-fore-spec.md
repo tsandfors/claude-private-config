@@ -28,12 +28,20 @@ om – att kampanjen skulle få kundens hela arrangemang med egen sida, två vye
 valet fanns inte att göra innan någon räknat. **Mätningen var inte en precisering av hans
 önskemål, den var förutsättningen för att han skulle kunna fatta ett bättre beslut.**
 
+**Samma fel med en annan proxy, 2026-09-09.** Jag uppskattade hur mycket en trimning av
+`CLAUDE.md` skulle ge genom att titta på **sektionernas storlek** – den största måste väl vara
+mest berättelse. Utfallet blev 6,5k tecken mot de 14–18k jag sagt. Läst stycke för stycke var
+kalendersektionen, som är filens största, nästan bara regler och gav 586 tecken. **Volym är
+ingen proxy för innehåll**, och en uppskattning från en proxy är en gissning som låter som en
+mätning.
+
 **How to apply:** Innan jag skriver ner ett önskemål som en punkt eller en spec: greppa fram
 alla ställen det påstås gälla och räkna dem. Kolla särskilt om de liknar varandra – gör de inte
-det är "samma sak överallt" fel form på svaret. Redovisa siffran för Tomas innan jag skriver, och
-inte efteråt som en fotnot; det är där han kan använda den. Och skriv aldrig ett tal i texten som
-jag inte läst ur koden samma dag – två av mina egna påståenden i samma svep var fel och fångades
-bara av att jag gick tillbaka till källan innan jag committade.
+det är "samma sak överallt" fel form på svaret. Ska jag uppskatta hur stort ett arbete blir:
+läs ett stickprov av innehållet, extrapolera aldrig från volym. Redovisa siffran för Tomas
+innan jag skriver, och inte efteråt som en fotnot; det är där han kan använda den. Och skriv
+aldrig ett tal i texten som jag inte läst ur koden samma dag – två av mina egna påståenden i
+samma svep var fel och fångades bara av att jag gick tillbaka till källan innan jag committade.
 
 Skiljer sig från [[ett-fel-sitter-sallan-ensamt]], som handlar om ett **fel** som sitter på fler
 ställen än där jag såg det. Det här är motsatt riktning: ett **önskemål** som gäller på färre
