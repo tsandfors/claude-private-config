@@ -51,6 +51,8 @@ detsamma — jobbets 94 minnen hör inte hit.
 - [En backup säger inte vad som blev kvar](backup-svarar-inte-pa-vad-som-blev-kvar.md) — mät den kvarvarande sidan efter en städning, inte den borttagna
 - [Tystnad är tvetydig](tystnad-ar-tvetydig.md) — fråga vad en kontroll jämför mot; evig tystnad och evigt larm ser båda ut som ett fungerande larm
 - [Ett grönt test bevisar inget i sig](gront-test-bevisar-inget-i-sig.md) — kör mutationen; mät också utan ändringen; en fixtur med ett exemplar mäter inte en regel om flera
+- [En normalisering är också en gissning](normalisering-ar-ocksa-en-gissning.md) — raden jag skrev för att slippa gissa tar bort ett fall jag inte räknade upp
+- [Ett prov får inte orsaka skadan](prov-far-inte-orsaka-skadan.md) — rikta prov på oåterkalleliga spärrar mot ett påhittat mål, inte mot det riktiga
 - [Dokumentationen av en sanering läcker](dokumentationen-av-en-sanering-lacker.md) — att beskriva en borttagen sträng återinför den; kontrollera diffen, inte arbetsträdet
 
 ## att-gora
