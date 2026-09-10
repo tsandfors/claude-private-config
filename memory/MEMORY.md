@@ -36,6 +36,7 @@ detsamma — jobbets 94 minnen hör inte hit.
 - [Ett fel sitter sällan ensamt](ett-fel-sitter-sallan-ensamt.md) — greppa efter mönstret så fort jag kan formulera det; börja i filen jag står i
 - [Räkna omfattningen före spec](rakna-omfattningen-fore-spec.md) — ett önskemål gäller ofta färre ställen än det låter, och siffran ändrar vad det betyder
 - [En spec är inte sann för att den är skriven](en-spec-ar-inte-sann-for-att-den-ar-skriven.md) — fråga om regeln är sann som den står innan jag kodar den, inte bara hur den ska kodas
+- [En spec nämner ofta bara ena halvan](en-spec-namner-ofta-bara-ena-halvan.md) — specen säger vem som får ändra och tiger om vem som får läsa; fråga efter halvan som saknas
 - [En vakt på namnet täcker inte saken](en-vakt-pa-namnet-tacker-inte-saken.md) — räkna ingångarna till det som skyddas, inte sätten jag brukar nå det
 - [En kompensation kan dölja ett fel](en-kompensation-kan-dolja-ett-fel.md) — klampningar och toleranser maskerar; prova också i läget där de inte gäller
 - [Obemärgat arbete är osynligt](obemargat-arbete-ar-osynligt.md) — svep efter obemärgade brancher innan jag skriver om något; frånvaro har ingen representation
@@ -44,6 +45,7 @@ detsamma — jobbets 94 minnen hör inte hit.
 - [Förklara brus där granskningen letar](forklara-brus-dar-granskningen-letar.md) — ofarligt brus återupptäcks som fynd; säg också om en notering är en uppmaning eller inte
 - [Ett steg kan lämna ett trasigt mellanläge](ett-steg-kan-lamna-ett-trasigt-mellanlage.md) — namnge fönstret där appen är sämre än före; låt det styra ordningen på resten
 - [Ett villkor kan låsa tillståndet inifrån](ett-villkor-kan-lasa-tillstandet-inifran.md) — döljer jag vägen ut ur ett tillstånd blir tillståndet permanent; räkna övergångarna
+- [Ett namn som inte skiljer är ett halvt namn](ett-namn-som-inte-skiljer-ar-ett-halvt-namn.md) — tre knappar kan heta likadant och passera ett namnsvep; disambiguering i en selektor är ett fynd
 
 ## Tokenkostnad och kontext
 
@@ -61,9 +63,11 @@ detsamma — jobbets 94 minnen hör inte hit.
 - [Tystnad är tvetydig](tystnad-ar-tvetydig.md) — fråga vad en kontroll jämför mot; evig tystnad och evigt larm ser båda ut som ett fungerande larm
 - [En svit bygger sin egen värld](en-svit-bygger-sin-egen-varld.md) — grönt mäter inte dev-miljön; okörda migrationer och gamla containrar faller utanför
 - [Ett grönt test bevisar inget i sig](gront-test-bevisar-inget-i-sig.md) — kör mutationen; mät också utan ändringen; en fixtur med ett exemplar mäter inte en regel om flera
+- [En grön mutation är inte ett besked](en-gron-mutation-ar-inte-ett-besked.md) — kontrollera att mutationen muterade, och att facit inte härleds ur det som muterades
 - [En väntan flyttar mätpunkten](en-vantan-flyttar-matpunkten.md) — en tillagd await låter allt annat rendera; skopa assertionen i stället för att räkna i hela dokumentet
 - [Frånvaro behöver ett positivt kvitto](franvaro-behover-ett-positivt-kvitto.md) — ett test på att något inte finns måste ankras i något som säkert hänt; annars är det grönt av fel skäl
 - [Två källor ger tillstånd per kombination](tva-kallor-ger-tillstand-per-kombination.md) — pröva den ena läsningen trasig och den andra hel; det är där en kontroll ljuger tvärsäkert
+- [Ett värde i en URL har en teckenmängd](ett-varde-i-en-url-har-en-teckenmangd.md) — `+` blir mellanslag; en tolerant fallback gör felet tyst
 - [En normalisering är också en gissning](normalisering-ar-ocksa-en-gissning.md) — raden jag skrev för att slippa gissa tar bort ett fall jag inte räknade upp
 - [Ett prov får inte orsaka skadan](prov-far-inte-orsaka-skadan.md) — rikta prov på oåterkalleliga spärrar mot ett påhittat mål, inte mot det riktiga
 - [Backa ett prov med en kopia](backa-ett-prov-med-en-kopia.md) — `git checkout` backar till senaste commit, inte till före mutationen
