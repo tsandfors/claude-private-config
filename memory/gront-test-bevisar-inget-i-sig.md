@@ -38,6 +38,14 @@ att bygga kontrollfallet tyst – en `assert` matchade ordet "costs" i en orelat
 "mutanten" var en oförändrad kopia och jämförelsen var skriptet mot sig självt. Kontrollfallet
 behöver alltså sin egen kontroll: verifiera att det skiljer sig från originalet.
 
+**Och ett mutationsprov mäter sviten lika mycket som koden.** 2026-09-10 fällde en avsiktlig
+mutation två tester, och det andra hade ingenting med mutationen att göra: ett `window.confirm`
+stubbat till *ja* återställdes sist i sitt eget test, och det testet var det som just gjorts
+rött — så nästa test ärvde dialogen. Provet var alltså giltigt (rätt test föll) och avslöjade
+samtidigt att sviten smittar. **Räkna därför vilka tester som föll, inte bara att något föll:
+överskottet är ett fynd om riggen**, och det är den enda gång man ser det, eftersom en grön
+körning aldrig utlöser läckan.
+
 **How to apply:** När ett nytt test blir grönt på första försöket: återinför felet det ska
 fånga och kontrollera att det faller, och att det faller på rätt sak. När jag mäter en
 förändring: mät också utan den, i samma omgång och på samma maskin. När en ändring inte

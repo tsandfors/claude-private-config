@@ -43,6 +43,7 @@ detsamma — jobbets 94 minnen hör inte hit.
 - [Mina uppslag rankas inte](mina-uppslag-rankas-inte.md) — egna idéer sägs i samtalet, aldrig i användarens kö; placeringen slår brasklappen
 - [Förklara brus där granskningen letar](forklara-brus-dar-granskningen-letar.md) — ofarligt brus återupptäcks som fynd; säg också om en notering är en uppmaning eller inte
 - [Ett steg kan lämna ett trasigt mellanläge](ett-steg-kan-lamna-ett-trasigt-mellanlage.md) — namnge fönstret där appen är sämre än före; låt det styra ordningen på resten
+- [Ett villkor kan låsa tillståndet inifrån](ett-villkor-kan-lasa-tillstandet-inifran.md) — döljer jag vägen ut ur ett tillstånd blir tillståndet permanent; räkna övergångarna
 
 ## Tokenkostnad och kontext
 
