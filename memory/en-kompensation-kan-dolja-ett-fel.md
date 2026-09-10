@@ -6,7 +6,7 @@ metadata:
   type: feedback
   scope: global
   originSessionId: 63310fb9-d8c0-488a-8e1d-d96e5545d2ef
-  modified: 2026-09-05T22:26:11.462Z
+  modified: 2026-09-10T01:08:03.355Z
 ---
 
 En rad som kompenserar för något – en klampning, ett golv, en uppräkning, en tolerans – gör två
@@ -30,6 +30,14 @@ Två följdsatser är värda lika mycket som fyndet:
 - **Marginalen avgör vad ett test kan se.** Ett prov som bara körs i det läge där kompensationen
   är aktiv kan aldrig fälla något som ryms i den. Regressionstestet fick därför datum strax
   efter ett årsskifte, alltså i det läge där uppräkningen *inte* gäller.
+
+**Samma form, andra skepnaden – två skydd där det ena maskerar det andra.** 2026-09-10 i samma
+repo: en borttagen medlem fick både `is_active = False` och sin token raderad. Mutationsprovet
+som strök *tokenraderingen* blev **grönt**, för `is_active` ensamt räcker för att DRF ska neka.
+Raden var alltså omätt, och en omätt rad är inte ett skydd utan en förhoppning. Provet som mäter
+den måste stänga av det maskerande skyddet – här: öppna kontot igen, vilket är precis vad
+Djangos admin gör. Klampningen och det dubbla skyddet är samma fråga ställd två gånger: **vad
+finns det för läge där just den här raden är den enda som håller?**
 
 **How to apply:** När jag skriver eller läser en rad som kompenserar – `max(...)`, ett golv, en
 klampning, en generös tolerans i en assert – ställ frågan *vad skulle den här raden dölja om

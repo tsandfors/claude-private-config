@@ -35,11 +35,19 @@ detsamma — jobbets 94 minnen hör inte hit.
 - [En instruktion är ingen spärr](instruktion-ar-ingen-sparr.md) — bruten rutin flyttas till harnesset, inte skrivs om tydligare
 - [Ett fel sitter sällan ensamt](ett-fel-sitter-sallan-ensamt.md) — greppa efter mönstret så fort jag kan formulera det; börja i filen jag står i
 - [Räkna omfattningen före spec](rakna-omfattningen-fore-spec.md) — ett önskemål gäller ofta färre ställen än det låter, och siffran ändrar vad det betyder
+- [En spec är inte sann för att den är skriven](en-spec-ar-inte-sann-for-att-den-ar-skriven.md) — fråga om regeln är sann som den står innan jag kodar den, inte bara hur den ska kodas
 - [En vakt på namnet täcker inte saken](en-vakt-pa-namnet-tacker-inte-saken.md) — räkna ingångarna till det som skyddas, inte sätten jag brukar nå det
 - [En kompensation kan dölja ett fel](en-kompensation-kan-dolja-ett-fel.md) — klampningar och toleranser maskerar; prova också i läget där de inte gäller
 - [Obemärgat arbete är osynligt](obemargat-arbete-ar-osynligt.md) — svep efter obemärgade brancher innan jag skriver om något; frånvaro har ingen representation
 - [Mät takten, inte bara nivån](mat-takten-inte-bara-nivan.md) — ett tak som nås av något som växer är ingen städuppgift; läs tillväxten ur historiken
 - [Mina uppslag rankas inte](mina-uppslag-rankas-inte.md) — egna idéer sägs i samtalet, aldrig i användarens kö; placeringen slår brasklappen
+- [Förklara brus där granskningen letar](forklara-brus-dar-granskningen-letar.md) — ofarligt brus återupptäcks som fynd; säg också om en notering är en uppmaning eller inte
+- [Ett steg kan lämna ett trasigt mellanläge](ett-steg-kan-lamna-ett-trasigt-mellanlage.md) — namnge fönstret där appen är sämre än före; låt det styra ordningen på resten
+
+## Tokenkostnad och kontext
+
+- [Ett verktygsresultat kostar gånger återstående turer](verktygsresultat-kostar-ganger-aterstaende-turer.md) — mät medelkontext per tur ur `usage`; kortare sessioner slår kortare svar
+- [Caveman avvisad, effort high behålls](caveman-avvisad-effort-high-behalls.md) — bägge prövade och avvisade 2026-09-10; föreslå dem inte igen utan nya siffror
 
 ## Git
 
@@ -50,9 +58,14 @@ detsamma — jobbets 94 minnen hör inte hit.
 - [Verifiering hör till leveransen](verifiering-hor-till-leveransen.md) — tester i samma svep som koden; luckor sägs högt i första meningen
 - [En backup säger inte vad som blev kvar](backup-svarar-inte-pa-vad-som-blev-kvar.md) — mät den kvarvarande sidan efter en städning, inte den borttagna
 - [Tystnad är tvetydig](tystnad-ar-tvetydig.md) — fråga vad en kontroll jämför mot; evig tystnad och evigt larm ser båda ut som ett fungerande larm
+- [En svit bygger sin egen värld](en-svit-bygger-sin-egen-varld.md) — grönt mäter inte dev-miljön; okörda migrationer och gamla containrar faller utanför
 - [Ett grönt test bevisar inget i sig](gront-test-bevisar-inget-i-sig.md) — kör mutationen; mät också utan ändringen; en fixtur med ett exemplar mäter inte en regel om flera
+- [En väntan flyttar mätpunkten](en-vantan-flyttar-matpunkten.md) — en tillagd await låter allt annat rendera; skopa assertionen i stället för att räkna i hela dokumentet
+- [Frånvaro behöver ett positivt kvitto](franvaro-behover-ett-positivt-kvitto.md) — ett test på att något inte finns måste ankras i något som säkert hänt; annars är det grönt av fel skäl
+- [Två källor ger tillstånd per kombination](tva-kallor-ger-tillstand-per-kombination.md) — pröva den ena läsningen trasig och den andra hel; det är där en kontroll ljuger tvärsäkert
 - [En normalisering är också en gissning](normalisering-ar-ocksa-en-gissning.md) — raden jag skrev för att slippa gissa tar bort ett fall jag inte räknade upp
 - [Ett prov får inte orsaka skadan](prov-far-inte-orsaka-skadan.md) — rikta prov på oåterkalleliga spärrar mot ett påhittat mål, inte mot det riktiga
+- [Backa ett prov med en kopia](backa-ett-prov-med-en-kopia.md) — `git checkout` backar till senaste commit, inte till före mutationen
 - [Dokumentationen av en sanering läcker](dokumentationen-av-en-sanering-lacker.md) — att beskriva en borttagen sträng återinför den; kontrollera diffen, inte arbetsträdet
 
 ## att-gora
