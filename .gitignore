@@ -20,6 +20,13 @@
 # ska bo i ett av dem. Reglerna står kvar i projektfilen.
 !SKOTT.md
 
+# Briefen om varför plan mode sällan föreslås, skriven 2026-09-19 åt en framtida session som
+# ska utforska frågan. Här och inte i att-gora av samma skäl som SKOTT.md: den handlar om hur
+# jag arbetar i varje privat session, inte om den appen. Filen var osynlig i `git status` i
+# tjugo minuter innan den här raden skrevs -- `*` ovan svalde den utan att säga något, vilket
+# är exakt det whitelistens egen ingress varnar för. Nästa toppnivåfil behöver samma rad.
+!PLAN_MODE.md
+
 !bin/
 !bin/**
 

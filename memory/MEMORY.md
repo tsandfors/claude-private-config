@@ -31,6 +31,8 @@ detsamma — jobbets 94 minnen hör inte hit.
 
 - [Tomas är backendutvecklare](tomas-ar-backendutvecklare.md) — UX-omdömet ska komma från mig oombett, inte efterfrågas
 - [Utmana oklarheter](utmana-oklarheter.md) — stående lov att ifrågasätta i stället för att gissa; smaken är hans, mätningen min
+- [En uppdelning går att granska](en-uppdelning-gar-att-granska.md) — flytta stycken oförändrade i stället för att skriva om; en omskrivning av resonerande prosa går inte att läsa sig till
+- [Räkneord ruttnar tystast](rakneord-ruttnar-tystast.md) — greppa talen först vid en dokumentgranskning; stryk hellre talet än uppdatera det
 - [Korrigera, inte bara komplettera](korrigera-inte-bara-komplettera.md) — gör ett motsägelsesvep före "klart"; riv upp gamla påståenden, lägg inte bara till
 - [En instruktion är ingen spärr](instruktion-ar-ingen-sparr.md) — bruten rutin flyttas till harnesset, inte skrivs om tydligare
 - [Ett fel sitter sällan ensamt](ett-fel-sitter-sallan-ensamt.md) — greppa efter mönstret så fort jag kan formulera det; börja i filen jag står i
@@ -46,6 +48,10 @@ detsamma — jobbets 94 minnen hör inte hit.
 - [Ett steg kan lämna ett trasigt mellanläge](ett-steg-kan-lamna-ett-trasigt-mellanlage.md) — namnge fönstret där appen är sämre än före; låt det styra ordningen på resten
 - [Ett villkor kan låsa tillståndet inifrån](ett-villkor-kan-lasa-tillstandet-inifran.md) — döljer jag vägen ut ur ett tillstånd blir tillståndet permanent; räkna övergångarna
 - [Ett namn som inte skiljer är ett halvt namn](ett-namn-som-inte-skiljer-ar-ett-halvt-namn.md) — tre knappar kan heta likadant och passera ett namnsvep; disambiguering i en selektor är ett fynd
+
+## Öppna spår
+
+- [Plan mode utreds separat](plan-mode-utreds-separat.md) — briefen ligger i `~/.claude-private/PLAN_MODE.md`; frågan om modellen går inte att besvara inifrån, och mätningen förorenar sig själv
 
 ## Tokenkostnad och kontext
 
@@ -66,12 +72,15 @@ detsamma — jobbets 94 minnen hör inte hit.
 - [En grön mutation är inte ett besked](en-gron-mutation-ar-inte-ett-besked.md) — kontrollera att mutationen muterade, och att facit inte härleds ur det som muterades
 - [En väntan flyttar mätpunkten](en-vantan-flyttar-matpunkten.md) — en tillagd await låter allt annat rendera; skopa assertionen i stället för att räkna i hela dokumentet
 - [Frånvaro behöver ett positivt kvitto](franvaro-behover-ett-positivt-kvitto.md) — ett test på att något inte finns måste ankras i något som säkert hänt; annars är det grönt av fel skäl
+- [Tömma är inte att hämta om](tomma-ar-inte-att-hamta-om.md) — kastat tillstånd ersätts inte av sig självt; fråga vad som får skärmen att fråga igen
 - [Två källor ger tillstånd per kombination](tva-kallor-ger-tillstand-per-kombination.md) — pröva den ena läsningen trasig och den andra hel; det är där en kontroll ljuger tvärsäkert
 - [Ett värde i en URL har en teckenmängd](ett-varde-i-en-url-har-en-teckenmangd.md) — `+` blir mellanslag; en tolerant fallback gör felet tyst
 - [En normalisering är också en gissning](normalisering-ar-ocksa-en-gissning.md) — raden jag skrev för att slippa gissa tar bort ett fall jag inte räknade upp
 - [Ett prov får inte orsaka skadan](prov-far-inte-orsaka-skadan.md) — rikta prov på oåterkalleliga spärrar mot ett påhittat mål, inte mot det riktiga
 - [Backa ett prov med en kopia](backa-ett-prov-med-en-kopia.md) — `git checkout` backar till senaste commit, inte till före mutationen
 - [Dokumentationen av en sanering läcker](dokumentationen-av-en-sanering-lacker.md) — att beskriva en borttagen sträng återinför den; kontrollera diffen, inte arbetsträdet
+- [En byggtidsvariabel reser med imagen](byggtidsvariabel-reser-med-imagen.md) — fråga när en konfiguration läses; ta hellre bort frågan än sätt rätt värde
+- [En olåst version driver isär](olast-version-driver-isar.md) — rullande taggar och caret-intervall gör maskinerna olika; den som redan har artefakten kan inte se det
 
 ## att-gora
 
