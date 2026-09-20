@@ -11,8 +11,45 @@ varje privat session i varje privat repo, alltså precis vad projektfilens eget 
 säger inte hör hemma i ett repo. Regeln hade tillämpats på filerna och aldrig på texten som
 beskriver dem.
 
-**Två saker läses härifrån och inte därifrån**, och de är skälet att filen inte bara är ett
-arkiv: runbooken för att skapa en ny PAT när token gått ut, och statusradens segmentdesign.
+**Tre saker läses härifrån och inte därifrån**, och de är skälet att filen inte bara är ett
+arkiv: runbooken för att skapa en ny PAT när token gått ut, statusradens segmentdesign, och
+avsnittet nedan om varför en privat lokal adress inte går att öppna i Chrome.
+
+**Och en tredje sorts blandning finns, vid sidan av de två resten av filen handlar om.** Allt
+härunder gäller vad som *läcker* – härifrån till jobbet, och sedan granskningen 2026-08-28 även
+åt andra hållet. Det som upptäcktes 2026-09-20 läcker ingenting åt något håll: det är jobbets
+styrning av maskinen som **hindrar** det privata arbetet. Ingen hemlighet rör sig, och ändå
+avgör arrangemanget vad som går att göra. Leta efter den sorten också.
+
+## Chrome når inga lokala nät, och felet ser ut som ett nätverksfel
+
+**Symptomet:** `http://192.168.50.120:8080/` ger `ERR_ADDRESS_UNREACHABLE` i Chrome, medan
+maskinen svarar på ping, `curl` får 200, och Firefox öppnar sidan utan problem.
+
+**Orsaken är en påtvingad Chrome-policy**, `/Library/Managed Preferences/com.google.Chrome.plist`,
+som 2026-09-20 innehöll exakt fyra nycklar:
+
+```
+LocalNetworkAccessRestrictionsEnabled = true
+LocalNetworkAccessAllowedForUrls = [ https://[*.]okta.com, https://[*.]oktapreview.com ]
+```
+
+Jobbet har alltså stängt av all åtkomst till lokala nät från Chrome, med Okta som enda undantag.
+
+**Läs den filen först nästa gång något privat inte går att nå härifrån.** Det tog tio minuters
+felsökning i fel ände att hitta – jag letade efter VPN, rutter och proxy, och gissade först på
+AppGate SDP, som ligger i samma katalog som en påtvingad profil och kör åtta `utun`-gränssnitt.
+Den var oskyldig. **Läxan är att ett fel som ser ut att sitta i nätet kan sitta i en policy**, och
+att `route -n get` och `curl` bägge säger att allt är bra medan browsern säger motsatsen.
+
+Det som skiljer processerna åt är vilken *applikation* som frågar, inte vilket nät den frågar
+över: Chrome lyder policyn, Firefox och `curl` gör det inte, och Playwrights egen Chromium under
+`~/Library/Caches/ms-playwright` gör det inte heller – vilket är värt att veta, eftersom
+browsergenomgången därför fortsätter fungera mot lokala adresser som Chrome vägrar öppna.
+
+**Åtgärden är Firefox för privata lokala adresser**, och den är bättre än ett undantag även om
+ett gick att få: den privata demon hör ändå inte hemma i den Chrome-profil som bär jobbets
+bokmärken.
 
 ---
 
