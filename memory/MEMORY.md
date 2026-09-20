@@ -61,6 +61,7 @@ detsamma — jobbets 94 minnen hör inte hit.
 ## Git
 
 - [Visa commit-meddelandet, pusha aldrig oombedd](no-commit-or-push-without-approval.md) — två skilda godkännanden; "är allt pushat?" är en fråga, inte en begäran
+- [Sammanfatta före commit](sammanfatta-fore-commit.md) — skumbar lista över vad som ändrats bredvid meddelandet; olika läsare, olika text
 
 ## Testning och verifiering
 
