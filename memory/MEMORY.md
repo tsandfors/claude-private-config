@@ -72,6 +72,7 @@ detsamma — jobbets 94 minnen hör inte hit.
 - [En svit bygger sin egen värld](en-svit-bygger-sin-egen-varld.md) — grönt mäter inte dev-miljön; okörda migrationer och gamla containrar faller utanför
 - [Sviten kör inte alla grindar](sviten-kor-inte-alla-grindar.md) — grönt mäter bara den grind jag råkade köra; typkollen och bygget är egna
 - [Ett grönt test bevisar inget i sig](gront-test-bevisar-inget-i-sig.md) — kör mutationen; mät också utan ändringen; en fixtur med ett exemplar mäter inte en regel om flera
+- [Ett test måste pinna sitt läge](ett-test-maste-pinna-sitt-lage.md) — en konfigurerbar gren mäts bara om testet sätter läget; annars mäter det defaulten och faller när flaggan vrids
 - [En grön mutation är inte ett besked](en-gron-mutation-ar-inte-ett-besked.md) — kontrollera att mutationen muterade, och att facit inte härleds ur det som muterades
 - [En flaky repro ska flytta till ett rum jag styr](en-flaky-repro-ska-flytta-till-ett-rum-jag-styr.md) — "kunde inte upprepa" mäter rummet, inte felet; konstruera sammanträffandet i ett enhetstest
 - [En mätning kan vara inaktuell eller stympad](en-matning-kan-vara-inaktuell-eller-stympad.md) — cachad, avklippt av `grep -A`, eller tystad av behörigheter; en felaktig uteslutning kommer aldrig tillbaka
