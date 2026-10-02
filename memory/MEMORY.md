@@ -73,6 +73,7 @@ detsamma — jobbets 94 minnen hör inte hit.
 - [Sviten kör inte alla grindar](sviten-kor-inte-alla-grindar.md) — grönt mäter bara den grind jag råkade köra; typkollen och bygget är egna
 - [Ett grönt test bevisar inget i sig](gront-test-bevisar-inget-i-sig.md) — kör mutationen; mät också utan ändringen; en fixtur med ett exemplar mäter inte en regel om flera
 - [En grön mutation är inte ett besked](en-gron-mutation-ar-inte-ett-besked.md) — kontrollera att mutationen muterade, och att facit inte härleds ur det som muterades
+- [En flaky repro ska flytta till ett rum jag styr](en-flaky-repro-ska-flytta-till-ett-rum-jag-styr.md) — "kunde inte upprepa" mäter rummet, inte felet; konstruera sammanträffandet i ett enhetstest
 - [En mätning kan vara inaktuell eller stympad](en-matning-kan-vara-inaktuell-eller-stympad.md) — cachad, avklippt av `grep -A`, eller tystad av behörigheter; en felaktig uteslutning kommer aldrig tillbaka
 - [En väntan flyttar mätpunkten](en-vantan-flyttar-matpunkten.md) — en tillagd await låter allt annat rendera; skopa assertionen i stället för att räkna i hela dokumentet
 - [En vakt matchar sin egen definition](en-vakt-matchar-sin-egen-definition.md) — ett svep flaggar filen som bär förbudslistan; undanta vid namn och med skäl
