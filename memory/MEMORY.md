@@ -79,6 +79,7 @@ detsamma — jobbets 94 minnen hör inte hit.
 - [En väntan flyttar mätpunkten](en-vantan-flyttar-matpunkten.md) — en tillagd await låter allt annat rendera; skopa assertionen i stället för att räkna i hela dokumentet
 - [En vakt matchar sin egen definition](en-vakt-matchar-sin-egen-definition.md) — ett svep flaggar filen som bär förbudslistan; undanta vid namn och med skäl
 - [Frånvaro behöver ett positivt kvitto](franvaro-behover-ett-positivt-kvitto.md) — ett test på att något inte finns måste ankras i något som säkert hänt; annars är det grönt av fel skäl
+- [En tom lista speglar vägen dit](en-tom-lista-speglar-vagen-dit.md) — frånvaro i en sonderad lista säger något om endpoint och behörighet, inte om vad som finns
 - [En selektor kan leta efter fel namn](en-selektor-kan-leta-efter-fel-namn.md) — CSS gemenfäller attributnamnet, så camelCase på SVG matchar aldrig och frånvaropåståenden blir gröna av fel skäl
 - [Tömma är inte att hämta om](tomma-ar-inte-att-hamta-om.md) — kastat tillstånd ersätts inte av sig självt; fråga vad som får skärmen att fråga igen
 - [Två källor ger tillstånd per kombination](tva-kallor-ger-tillstand-per-kombination.md) — pröva den ena läsningen trasig och den andra hel; det är där en kontroll ljuger tvärsäkert

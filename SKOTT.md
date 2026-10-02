@@ -380,6 +380,26 @@ den satt i `settings.json` som inte längre läses.
 - **Ingen Anthropic-inloggning behövs.** Vertex autentiserar mot GCP:s ADC i
   `~/.config/gcloud/`, som ligger utanför alla konfigkataloger och därför gäller likadant i
   den privata. Byter Vertex-svaret någon gång är det *då* en inloggning tillkommer.
+- **Regionen är `eu` sedan 2026-10-03, och den avgör vilka modeller som finns.** Den privata
+  konfigurationen stod på `global`, och följden var att `/model` bara erbjöd `claude-opus-5[1m]`
+  – Claude Code sonderar Vertex vid uppstart och seedar `ANTHROPIC_DEFAULT_OPUS_MODEL` med vad
+  den hittar, så den tomma väljaren såg ut som att projektet saknade Opus 5.5. **Det stämde
+  inte.** Jobbets `~/.claude/settings.json` kör `CLOUD_ML_REGION=eu` och
+  `model=claude-opus-5-5[1m]` mot *samma* GCP-projekt, alltså var modellen påslagen hela tiden
+  och det var endpointen som inte serverade den. Läxan är generell nog att skrivas ner: **en tom
+  väljare är ett svar om vägen dit, inte om vad som finns i andra änden.** Jag hann dra fel
+  slutsats – att grinden satt i projektets Model Garden – innan jobbfilen lästes.
+
+  Två följder att känna till. **Multi-region kostar 10 % mer än `global`** enligt Vertex egen
+  dokumentation, och notan går till arbetsgivarens projekt, alltså är det här undantaget nu
+  något dyrare än det var. Och **`modelSettings` är nycklad per modell-id**, så `effortLevel`
+  slutade gälla i tysthet när modellen byttes – nyckeln heter `claude-opus-5-5` nu, satt till
+  `high` för att spegla jobbets.
+
+  **`settings.json` är ospårad med flit** (`.gitignore` rad 45: den bär projektnamnet och
+  hemkatalogens sökväg), så det finns ingen `git checkout` att backa med. Kopian före
+  ändringen heter `settings.json.bak-2026-10-03`. `settings.example.json` är den committade
+  spegeln och fick samma regionändring.
 
 **Allt annat som går att lägga i repot ligger i repot** – det är regeln, uttryckligen begärd
 2026-08-26, och den gäller framåt: hamnar en ny projektinställning i en konfigkatalog ska den
