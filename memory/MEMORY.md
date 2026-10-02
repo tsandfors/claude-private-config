@@ -43,6 +43,7 @@ detsamma — jobbets 94 minnen hör inte hit.
 - [En kompensation kan dölja ett fel](en-kompensation-kan-dolja-ett-fel.md) — klampningar och toleranser maskerar; prova också i läget där de inte gäller
 - [Obemärgat arbete är osynligt](obemargat-arbete-ar-osynligt.md) — svep efter obemärgade brancher innan jag skriver om något; frånvaro har ingen representation
 - [Mät takten, inte bara nivån](mat-takten-inte-bara-nivan.md) — ett tak som nås av något som växer är ingen städuppgift; läs tillväxten ur historiken
+- [En rekommendation måste bära ett argument](en-rekommendation-maste-bara-ett-argument.md) — skriv ut skälet och pröva det; "så är det redan" är tröghet, och alla alternativ ska ha samma underlag
 - [Mina uppslag rankas inte](mina-uppslag-rankas-inte.md) — egna idéer sägs i samtalet, aldrig i användarens kö; placeringen slår brasklappen
 - [Förklara brus där granskningen letar](forklara-brus-dar-granskningen-letar.md) — ofarligt brus återupptäcks som fynd; säg också om en notering är en uppmaning eller inte
 - [Ett steg kan lämna ett trasigt mellanläge](ett-steg-kan-lamna-ett-trasigt-mellanlage.md) — namnge fönstret där appen är sämre än före; låt det styra ordningen på resten
@@ -69,10 +70,14 @@ detsamma — jobbets 94 minnen hör inte hit.
 - [En backup säger inte vad som blev kvar](backup-svarar-inte-pa-vad-som-blev-kvar.md) — mät den kvarvarande sidan efter en städning, inte den borttagna
 - [Tystnad är tvetydig](tystnad-ar-tvetydig.md) — fråga vad en kontroll jämför mot; evig tystnad och evigt larm ser båda ut som ett fungerande larm
 - [En svit bygger sin egen värld](en-svit-bygger-sin-egen-varld.md) — grönt mäter inte dev-miljön; okörda migrationer och gamla containrar faller utanför
+- [Sviten kör inte alla grindar](sviten-kor-inte-alla-grindar.md) — grönt mäter bara den grind jag råkade köra; typkollen och bygget är egna
 - [Ett grönt test bevisar inget i sig](gront-test-bevisar-inget-i-sig.md) — kör mutationen; mät också utan ändringen; en fixtur med ett exemplar mäter inte en regel om flera
 - [En grön mutation är inte ett besked](en-gron-mutation-ar-inte-ett-besked.md) — kontrollera att mutationen muterade, och att facit inte härleds ur det som muterades
+- [En mätning kan vara inaktuell eller stympad](en-matning-kan-vara-inaktuell-eller-stympad.md) — cachad, avklippt av `grep -A`, eller tystad av behörigheter; en felaktig uteslutning kommer aldrig tillbaka
 - [En väntan flyttar mätpunkten](en-vantan-flyttar-matpunkten.md) — en tillagd await låter allt annat rendera; skopa assertionen i stället för att räkna i hela dokumentet
+- [En vakt matchar sin egen definition](en-vakt-matchar-sin-egen-definition.md) — ett svep flaggar filen som bär förbudslistan; undanta vid namn och med skäl
 - [Frånvaro behöver ett positivt kvitto](franvaro-behover-ett-positivt-kvitto.md) — ett test på att något inte finns måste ankras i något som säkert hänt; annars är det grönt av fel skäl
+- [En selektor kan leta efter fel namn](en-selektor-kan-leta-efter-fel-namn.md) — CSS gemenfäller attributnamnet, så camelCase på SVG matchar aldrig och frånvaropåståenden blir gröna av fel skäl
 - [Tömma är inte att hämta om](tomma-ar-inte-att-hamta-om.md) — kastat tillstånd ersätts inte av sig självt; fråga vad som får skärmen att fråga igen
 - [Två källor ger tillstånd per kombination](tva-kallor-ger-tillstand-per-kombination.md) — pröva den ena läsningen trasig och den andra hel; det är där en kontroll ljuger tvärsäkert
 - [Ett värde i en URL har en teckenmängd](ett-varde-i-en-url-har-en-teckenmangd.md) — `+` blir mellanslag; en tolerant fallback gör felet tyst
@@ -86,3 +91,4 @@ detsamma — jobbets 94 minnen hör inte hit.
 ## att-gora
 
 - [Databasen är slängbar](databasen-ar-slangbar.md) — migrationssvårighet är inget argument här; villkorslöst sedan syftesbytet 2026-08-28
+- [Frun når inte demon](frun-nar-inte-demon.md) — kontot `pennan` är klart, men hennes Mac når inte `192.168.50.120:8080`; två okörda steg kvar, olöst 2026-09-30
