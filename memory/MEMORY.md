@@ -35,6 +35,7 @@ detsamma — jobbets 94 minnen hör inte hit.
 - [Räkneord ruttnar tystast](rakneord-ruttnar-tystast.md) — greppa talen först vid en dokumentgranskning; stryk hellre talet än uppdatera det
 - [Korrigera, inte bara komplettera](korrigera-inte-bara-komplettera.md) — gör ett motsägelsesvep före "klart"; riv upp gamla påståenden, lägg inte bara till
 - [En instruktion är ingen spärr](instruktion-ar-ingen-sparr.md) — bruten rutin flyttas till harnesset, inte skrivs om tydligare
+- [En underkatalogs CLAUDE.md laddas bara vid Read](en-underkatalogs-claude-md-laddas-bara-vid-read.md) — inte vid sed/cat, Grep eller heredoc; pekaren i roten måste säga det, och bara regler som enbart gäller katalogen hör hemma där
 - [Ett fel sitter sällan ensamt](ett-fel-sitter-sallan-ensamt.md) — greppa efter mönstret så fort jag kan formulera det; börja i filen jag står i
 - [Räkna omfattningen före spec](rakna-omfattningen-fore-spec.md) — ett önskemål gäller ofta färre ställen än det låter, och siffran ändrar vad det betyder
 - [En spec är inte sann för att den är skriven](en-spec-ar-inte-sann-for-att-den-ar-skriven.md) — fråga om regeln är sann som den står innan jag kodar den, inte bara hur den ska kodas
@@ -94,4 +95,5 @@ detsamma — jobbets 94 minnen hör inte hit.
 ## att-gora
 
 - [Databasen är slängbar](databasen-ar-slangbar.md) — migrationssvårighet är inget argument här; villkorslöst sedan syftesbytet 2026-08-28
+- [Demon väntar på designöversynen](demon-vantar-pa-designoversynen.md) — PR #2 ihopslagen 2026-10-03, men demomaskinen kör fortfarande den gamla appen tills Tomas kör `git pull && yarn demo`
 - [Frun når inte demon](frun-nar-inte-demon.md) — kontot `pennan` är klart, men hennes Mac når inte `192.168.50.120:8080`; två okörda steg kvar, olöst 2026-09-30

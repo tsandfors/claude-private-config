@@ -4,7 +4,7 @@ description: "En mätning som ser avgörande ut kan vara cachad, avklippt eller 
 metadata:
   type: feedback
   originSessionId: 7c6cecd4-6001-499d-bcda-5e47e4b83809
-  modified: 2026-09-30T08:41:41.599Z
+  modified: 2026-10-03T22:10:00.000Z
   scope: global
 ---
 
@@ -22,6 +22,11 @@ läst fel, och två av dem strök en riktig hypotes ur listan.
 - **`networksetup -getairportnetwork en0` sa "You are not associated with an AirPort network"**
   på ett interface som hade en fungerande adress. Det var en behörighetsartefakt – nyare macOS
   lämnar inte ut SSID utan platstjänster – och inte ett besked om anslutningen.
+- **En DOM-läsning direkt efter ett val i Playwright** (2026-10-03, *att-gora*) visade
+  fortfarande förra sparningens rad, och jag kallade det ett fynd. Sparningen räknade om alla
+  affärer och hade inte svarat än – samma läsning 1,5 sekunder senare visade rätt rad. Skärmen
+  var sann, men den mätte tillståndet *före* svaret. Vänta på ett tecken på att svaret kommit
+  (ringen, en ändrad text) innan frånvaron av en ändring läses som en bugg.
 
 **Varför:** En uteslutning är dyrare än en gissning. En hypotes jag inte tänkt på kommer
 tillbaka så fort mätningarna pekar dit, men en hypotes jag aktivt strukit är borta ur listan,
