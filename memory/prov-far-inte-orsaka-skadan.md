@@ -6,7 +6,7 @@ metadata:
   type: feedback
   scope: global
   originSessionId: 3b69eaa3-0aa5-4f3d-8c92-304c62b71dc8
-  modified: 2026-09-09T15:17:19.776Z
+  modified: 2026-10-12T12:00:00.000Z
 ---
 
 När jag provar att en spärr faktiskt nekar, och det den skyddar mot är **oåterkalleligt**, ska
@@ -24,6 +24,13 @@ får förstöra.**
 
 Det gäller bredare än spärrar: varje gång jag ska demonstrera att något *inte* händer, är det
 värt en sekund att fråga vad som händer om jag har fel.
+
+**En sond som skriver ska läsa först och återställa i `finally`.** 2026-10-12, i `/genomgang` av
+formulärbytet: sonden ändrade företagets ort mot API:t och föll på nästa rad (en selektor som
+träffade två fält), innan den hunnit lämna tillbaka det gamla värdet. Orten var handskriven och
+fanns inte kvar någonstans. Tomas strök det som dev-data, men samma sond mot demon hade kostat en
+intressents uppgift. Omkörningen läste varje värde före första skrivningen och återställde i ett
+`finally` – det är formen.
 
 **How to apply:** Före ett prov som rör radering, överskrivning eller något annat utan väg
 tillbaka: byt ut målet mot ett påhittat, eller flytta provet till ett skraprepo eller ett

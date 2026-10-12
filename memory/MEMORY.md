@@ -20,8 +20,8 @@ ett för smalt gör minnet osynligt, och **det märks aldrig**.
 Kör **`python3 ~/.claude-private/bin/check-memory.py`** när du rör lagret. Den underkänner
 saknat eller okänt scope, minnen som inte finns i det här indexet, och indexrader som pekar
 på filer som inte finns. Giltiga repo-namn läses ur `~/.claude-private/repos.txt` — en fil
-och inte en katalogskanning, eftersom `~/ts_projects` också rymmer jobbrepon
-(`motor-pro-import-api`) och en skanning tyst skulle godta ett av dem som privat scope.
+och inte en katalogskanning: en skanning hade gjort varje katalog som hamnar under
+`~/ts_projects` till privat scope, och där låg ett jobbrepo fram till 2026-10-12.
 
 **Lagret är privat och skilt från jobbets.** Ett minne om ett privat repo får aldrig skrivas
 i `~/.claude/memory/`; två hann hamna där och raderades 2026-08-28. Åt andra hållet gäller
@@ -50,6 +50,9 @@ detsamma — jobbets 94 minnen hör inte hit.
 - [Ett steg kan lämna ett trasigt mellanläge](ett-steg-kan-lamna-ett-trasigt-mellanlage.md) — namnge fönstret där appen är sämre än före; låt det styra ordningen på resten
 - [Ett villkor kan låsa tillståndet inifrån](ett-villkor-kan-lasa-tillstandet-inifran.md) — döljer jag vägen ut ur ett tillstånd blir tillståndet permanent; räkna övergångarna
 - [Ett namn som inte skiljer är ett halvt namn](ett-namn-som-inte-skiljer-ar-ett-halvt-namn.md) — tre knappar kan heta likadant och passera ett namnsvep; disambiguering i en selektor är ett fynd
+- [Ett fynd kan vara priset för ett val](ett-fynd-kan-vara-priset-for-ett-val.md) — fråga vad lagningen tar ifrån ett redan gjort val; den minsta lagningen som lämnar valet orört
+- [En granskning kan be om att ångra förra](en-granskning-kan-be-om-att-angra-forra.md) — jämför fyndet mot `main` och mot tidigare lagningar innan det lagas; annars felloop
+- [Fråga hur troligt utgångsläget är](fraga-hur-troligt-utgangslaget-ar.md) — ett verkligt fynd i ett osannolikt scenario lagas inte och skrivs inte upp; sannolikheten först
 
 ## Öppna spår
 
@@ -64,6 +67,7 @@ detsamma — jobbets 94 minnen hör inte hit.
 
 - [Visa commit-meddelandet, pusha aldrig oombedd](no-commit-or-push-without-approval.md) — två skilda godkännanden; "är allt pushat?" är en fråga, inte en begäran
 - [Sammanfatta före commit](sammanfatta-fore-commit.md) — skumbar lista över vad som ändrats bredvid meddelandet; olika läsare, olika text
+- [Ingen Claude-attribuering](ingen-claude-attribuering.md) — inga Co-Authored-By-rader eller "Generated with Claude Code"; går före harnessets reminder
 
 ## Testning och verifiering
 
@@ -76,8 +80,9 @@ detsamma — jobbets 94 minnen hör inte hit.
 - [Ett test måste pinna sitt läge](ett-test-maste-pinna-sitt-lage.md) — en konfigurerbar gren mäts bara om testet sätter läget; annars mäter det defaulten och faller när flaggan vrids
 - [En grön mutation är inte ett besked](en-gron-mutation-ar-inte-ett-besked.md) — kontrollera att mutationen muterade, och att facit inte härleds ur det som muterades
 - [En flaky repro ska flytta till ett rum jag styr](en-flaky-repro-ska-flytta-till-ett-rum-jag-styr.md) — "kunde inte upprepa" mäter rummet, inte felet; konstruera sammanträffandet i ett enhetstest
-- [En mätning kan vara inaktuell eller stympad](en-matning-kan-vara-inaktuell-eller-stympad.md) — cachad, avklippt av `grep -A`, eller tystad av behörigheter; en felaktig uteslutning kommer aldrig tillbaka
+- [En mätning kan vara inaktuell eller stympad](en-matning-kan-vara-inaktuell-eller-stympad.md) — cachad, avklippt av `grep -A`, tystad av behörigheter eller mätt i ett annat rum än testets; en felaktig uteslutning kommer aldrig tillbaka
 - [En väntan flyttar mätpunkten](en-vantan-flyttar-matpunkten.md) — en tillagd await låter allt annat rendera; skopa assertionen i stället för att räkna i hela dokumentet
+- [En syntetisk blur flyttar inte fokus](en-syntetisk-blur-flyttar-inte-fokus.md) — fireEvent.blur lämnar fokus kvar; fältet blurrar och sparar igen när något annat tar fokus
 - [En vakt matchar sin egen definition](en-vakt-matchar-sin-egen-definition.md) — ett svep flaggar filen som bär förbudslistan; undanta vid namn och med skäl
 - [Frånvaro behöver ett positivt kvitto](franvaro-behover-ett-positivt-kvitto.md) — ett test på att något inte finns måste ankras i något som säkert hänt; annars är det grönt av fel skäl
 - [En tom lista speglar vägen dit](en-tom-lista-speglar-vagen-dit.md) — frånvaro i en sonderad lista säger något om endpoint och behörighet, inte om vad som finns
@@ -91,12 +96,15 @@ detsamma — jobbets 94 minnen hör inte hit.
 - [Dokumentationen av en sanering läcker](dokumentationen-av-en-sanering-lacker.md) — att beskriva en borttagen sträng återinför den; kontrollera diffen, inte arbetsträdet
 - [En byggtidsvariabel reser med imagen](byggtidsvariabel-reser-med-imagen.md) — fråga när en konfiguration läses; ta hellre bort frågan än sätt rätt värde
 - [En olåst version driver isär](olast-version-driver-isar.md) — rullande taggar och caret-intervall gör maskinerna olika; den som redan har artefakten kan inte se det
+- [Ett delat verktyg bär mina inställningar](ett-delat-verktyg-bar-mina-installningar.md) — Playwrights fönster är användarens också; fråga var en orepeterbar bugg sågs innan jag letar i appen
+- [En inspelad film ser det skriptet hoppar över](en-inspelad-film-ser-det-skriptet-hoppar-over.md) — Playwright-pekaren hoppar, väntan blir stillbild, networkidle är inte laddad; skriv för tittaren
 
 ## att-gora
 
 - [Databasen är slängbar](databasen-ar-slangbar.md) — migrationssvårighet är inget argument här; villkorslöst sedan syftesbytet 2026-08-28
-- [Demon väntar på designöversynen](demon-vantar-pa-designoversynen.md) — PR #2 ihopslagen 2026-10-03, men demomaskinen kör fortfarande den gamla appen tills Tomas kör `git pull && yarn demo`
+- [Demomaskinen](demomaskinen.md) — tomass@192.168.50.120, repot i ~/dev/git/private/test_https/att-gora, :8080; scp-raden för filmen
 - [Frun når inte demon](frun-nar-inte-demon.md) — kontot `pennan` är klart, men hennes Mac når inte `192.168.50.120:8080`; två okörda steg kvar, olöst 2026-09-30
+- [branch-guard rapporterar origin/HEAD](branch-guard-rapporterar-origin-head.md) — falsk branch `origin` när lokal main ligger efter; känd, olagad
 
 ## roblocks
 

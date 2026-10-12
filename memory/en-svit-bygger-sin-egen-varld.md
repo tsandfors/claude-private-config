@@ -26,5 +26,11 @@ ur att något "fungerar". `showmigrations`, `docker ps` med bildtagg, eller ett 
 den riktiga endpointen. Frågan att ställa efter en grön svit är **vilken värld var det som
 mättes**, och det är alltid den sviten själv reste.
 
+**Samma lucka gäller riggens konfiguration, och den läcker in i påståenden och inte bara i
+mätningar.** 2026-10-07 skrev jag på fyra ställen att listan hämtas om "när fönstret får fokus",
+eftersom testriggens `QueryClient` gör det – men appens `main.tsx` sätter
+`refetchOnWindowFocus: false`. Lagningarna höll, men skälen var lånade ur riggen. Innan jag
+påstår hur appen beter sig vid körning: läs appens egen konfiguration, inte testriggens.
+
 Skilj det här från [[gront-test-bevisar-inget-i-sig]], som handlar om hur starkt ett påstående
 är. Det här handlar om hur brett det räcker.

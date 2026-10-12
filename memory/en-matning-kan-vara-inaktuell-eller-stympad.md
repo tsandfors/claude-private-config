@@ -1,10 +1,10 @@
 ---
 name: en-matning-kan-vara-inaktuell-eller-stympad
-description: "En mätning som ser avgörande ut kan vara cachad, avklippt eller tystad av behörigheter - kontrollera vad kommandot faktiskt svarar innan en hypotes stryks"
+description: "En mätning som ser avgörande ut kan vara cachad, avklippt, tystad av behörigheter eller gjord i ett annat rum än det som provas - kontrollera vad kommandot faktiskt svarar innan en hypotes stryks"
 metadata:
   type: feedback
   originSessionId: 7c6cecd4-6001-499d-bcda-5e47e4b83809
-  modified: 2026-10-03T22:10:00.000Z
+  modified: 2026-10-07T12:00:00.000Z
   scope: global
 ---
 
@@ -27,6 +27,12 @@ läst fel, och två av dem strök en riktig hypotes ur listan.
   affärer och hade inte svarat än – samma läsning 1,5 sekunder senare visade rätt rad. Skärmen
   var sann, men den mätte tillståndet *före* svaret. Vänta på ett tecken på att svaret kommit
   (ringen, en ändrad text) innan frånvaron av en ändring läses som en bugg.
+- **En mätning i `manage.py shell` sa att ett testsvep inte var grönt av fel skäl** (2026-10-07,
+  *att-gora*, granskningen av PR #10). Alla validatorer svarade där, och jag kallade fyndet
+  hypotetiskt. Men i shellet finns databasen, och i pytest är den spärrad: två validatorer
+  frågade databasen, kastade `RuntimeError` under sviten och föll tyst ur svepet. Fyndet var
+  live hela tiden. **Mät i samma rum som det som provas** – samma process, samma spärrar, samma
+  fixturer – annars mäter jag rummet och inte saken.
 
 **Varför:** En uteslutning är dyrare än en gissning. En hypotes jag inte tänkt på kommer
 tillbaka så fort mätningarna pekar dit, men en hypotes jag aktivt strukit är borta ur listan,
@@ -39,7 +45,8 @@ våning ner: utdatan var sann, men den mätte inte det jag trodde.
 om utdatan: **är den live eller cachad** (`arp`, DNS, `ps`-liknande ögonblicksbilder, allt med
 TTL), **är den hel eller beskuren** (`grep -A/-B` klipper i förhållande till träffen, och
 rubrikraden ligger ofta före), och **kan den vara tyst av ett annat skäl än det jag läser in**
-(behörigheter, deprecation, sandlåda). Föredra en mätning som bara kan vara sann om saken är
+(behörigheter, deprecation, sandlåda), och en fjärde när ett test eller en svit är det som
+provas: **är rummet jag mäter i samma som testets** (databas, nätverk, miljövariabler). Föredra en mätning som bara kan vara sann om saken är
 sann just nu – `curl`/`nc` mot en port slår `ping`, och en tom ARP-post slår en fylld. Och när
 en uteslutning visar sig fel: säg det rakt och gå vidare, se
 [[korrigera-inte-bara-komplettera]]. Jämför [[tystnad-ar-tvetydig]], som är samma fråga ställd
