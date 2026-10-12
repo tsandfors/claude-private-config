@@ -97,3 +97,7 @@ detsamma — jobbets 94 minnen hör inte hit.
 - [Databasen är slängbar](databasen-ar-slangbar.md) — migrationssvårighet är inget argument här; villkorslöst sedan syftesbytet 2026-08-28
 - [Demon väntar på designöversynen](demon-vantar-pa-designoversynen.md) — PR #2 ihopslagen 2026-10-03, men demomaskinen kör fortfarande den gamla appen tills Tomas kör `git pull && yarn demo`
 - [Frun når inte demon](frun-nar-inte-demon.md) — kontot `pennan` är klart, men hennes Mac når inte `192.168.50.120:8080`; två okörda steg kvar, olöst 2026-09-30
+
+## roblocks
+
+- [Äggön](roblocks.md) — Roblox-simulatorn: Rojo + Lune, `scripts/check.sh`, sonen testar `dist/Aggon.rbxl` på Windows, rebirth-kravet 400 mdr intjänade

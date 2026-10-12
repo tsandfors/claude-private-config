@@ -207,11 +207,39 @@ var och därför lätta att radera av misstag.
   `~/.claude/`. Den upptäcktes inifrån sig själv, av en fråga om något annat.
 
   Villkoret sitter nu på **katalogen**: en `chpwd`-hook plus ett anrop vid skalstart, för Warp
-  öppnar en flik direkt i en katalog utan att köra `cd`. Tio fall är mätta i ett rent zsh –
-  in i trädet, djupare ner, ut igen, skalstart på bägge sidor om gränsen, två besök i rad, och
-  att `~/ts_projects` **inte** räknas som trädet, eftersom jobbrepot ligger där. `claude()` står
+  öppnar en flik direkt i en katalog utan att köra `cd`. `claude()` står
   kvar som andra skott men är inte längre mekanismen; att lägga till `claude-latest()` bredvid
   hade varit att räkna upp namn igen.
+
+  **Trädet är hela `~/ts_projects` sedan 2026-10-12**, katalogen själv och allt under den. Fram
+  till dess var det bara `att-gora/`, och `~/ts_projects` räknades **inte**, eftersom jobbrepot
+  `motor-pro-import-api` låg där. Samma dag byggdes ett andra privat projekt, `roblocks`
+  (`tsandfors/aggon`), och **hela sessionen gick på jobbets konfiguration**: villkoret kände inte
+  till katalogen, och ingenting sade ifrån – `config-guard.py` bor i att-goras repo och kör inte
+  någon annanstans. Det märktes först när Tomas själv frågade om sessionen hade samma minnen som
+  att-gora. Jobbklonen raderades och gränsen flyttade upp en nivå. `ts_projects` själv räknas
+  med, för originalbygget 13–15 augusti startades därifrån.
+
+  Villkoret står nu **en gång**, i `_private_tree`, och `_private_claude_config`, `claude()` och
+  `gh()` frågar den – tre kopior hade glidit isär första gången någon rättade en av dem. Det är
+  två jämförelser och inte ett prefix med `*`: `"$HOME/ts_projects"*` hade släppt in
+  `~/ts_projects2`, och det gamla `"…/att-gora"*` släppte in `att-gora-kopia`. **`gh()` följde
+  med fast den inte var efterfrågad**, för den bar samma villkor, och `gh` i roblocks hade annars
+  gått till jobbets konfiguration.
+
+  Mätt 2026-10-12 i `env -i zsh -f` med en påhittad `HOME`, stubbar för `claude` och `gh`:
+  `cd` in i `ts_projects` själv, i `roblocks`, djupare ner i `att-gora`, ut igen, skalstart i
+  `roblocks`, i `ts_projects`, utanför och i `ts_projects2`, besök från privat till privat, ett
+  handsatt värde som överlever, `claude()` utan exporten, och `gh()` på bägge sidor om gränsen.
+  **Två fel i provet, inget i funktionen.** Första körningen ärvde sessionens egen
+  `CLAUDE_CONFIG_DIR` och `GH_CONFIG_DIR` och visade dem i stället för *osatt* – därav `env -i`.
+  Den andra lade `HOME` under `/tmp`, som är en symlänk till `/private/tmp`; utan ärvd `PWD`
+  räknar zsh fram den fysiska sökvägen, och skalstartsfallen föll. Den riktiga hemkatalogen har
+  ingen symlänk, och med en fysisk `HOME` gick de igenom.
+
+  **Den nya gränsen har en egen fälla: ett jobbrepo under `~/ts_projects` kör på den privata
+  konfigurationen utan ett ord.** Alltså samma läcka åt andra hållet. Kloner av jobbrepon hör
+  hemma någon annanstans.
 
   **Ett fel hittades av mätningen och inte av tanken**: första versionen gjorde `unset` på vägen
   ut, vilket förstörde ett värde någon satt för hand utanför trädet – på vägen ut var variabeln
@@ -293,8 +321,10 @@ var och därför lätta att radera av misstag.
   utanför indexet och indexrader utan fil. **Att den biter är mätt**, alla fyra felen
   framkallade var för sig, och exit 1 kontrollerad separat – en kontroll som aldrig faller är
   värdelös. Listan över giltiga repon är en fil och inte en katalogskanning, för `~/ts_projects`
-  rymmer också jobbrepot `motor-pro-import-api` och en skanning hade tyst godtagit det som
-  privat scope.
+  rymde också jobbrepot `motor-pro-import-api` och en skanning hade tyst godtagit det som
+  privat scope. Jobbklonen är raderad 2026-10-12, men filen står kvar som fil: en skanning hade
+  gjort varje katalog som någon gång hamnar där till privat scope, och det är samma fälla som
+  den nya gränsen i skalet.
 
   **Att lagret laddas från den nya sökvägen är mätt 2026-08-28**, i sessionen efter flytten,
   vilket var den enda plats det gick att mäta på: `MEMORY.md`-raderna stod i kontexten utan att
@@ -372,6 +402,36 @@ var och därför lätta att radera av misstag.
   Kvar i jobbets katalog: noll backupfiler, noll träffar på `att-gora`, `attgora`, `claude_temp`
   och `ts_projects` i `history.jsonl`. Stod här och inte i backloggen eftersom det rörde
   konfigurationen och inte appen.
+
+- **Roblocks-sessionen flyttades 2026-10-12, och svepet hittade en äldre läcka på köpet.**
+  Sessionen `bda862b0` hade gått på jobbets konfiguration (se trädet ovan) och lämnat spår på
+  sex ställen, inte de fyra som räknades upp: transkriptet med subagenter, planen
+  `zesty-wishing-gosling.md`, 13 rader i `history.jsonl`, sex filsnapshots i `file-history/`,
+  `session-env/` och `sessions/61811.json`, och en projektpost i `~/.claude.json` och dess
+  roterande backuper. De två sista var inte uppräknade. Kopierat, jämfört med `diff -r` och
+  `cmp`, och raderat först när `claude -p --resume … --fork-session` från den privata sidan
+  kunde svara på en fråga som krävde hela historiken. Forken raderades efteråt.
+
+  **Sessionen måste vara stängd innan den flyttas**, annars skriver den en ny fil på gamla
+  stället vid nästa tur. Och en stängd session tappar ingenting – allt den vet står i
+  transkriptet – men den skrev en `CLAUDE.md` i repot först, för det som ska gälla framåt hör
+  inte hemma i ett arkiv på 2 MB.
+
+  `~/.claude.json` bar också poster för `ts_projects` och `ts_projects/att-gora` från augusti
+  och september, med kostnad, sessions-id och en MCP-server i local scope. Alla tre är borta ur
+  filen och ur backuperna, kontrollerat som JSON mot originalet. **Och `history.jsonl` bar 12
+  rader från att-gora 2026-09-05** – `claude-latest`-sessionen, som kom efter städningen 08-28
+  och därför aldrig sveptes. Dess transkript finns ingenstans, så raderna var enda spåret och
+  är flyttade, inte raderade. Jobbets `history.jsonl` har nu noll träffar på `ts_projects`.
+
+  **Åt andra hållet går det inte att städa, och det ska stå skrivet.** Transkriptet bär jobbets
+  `CLAUDE.md`, minnesindex, Jira-nycklar och interna värdnamn i hundratals träffar, för det var
+  sessionens kontext. En blandad session är blandad var den än ligger; gränsen går vid *vems
+  session det är*, och den här var ett privat projekts. Att skära ut kontexten hade brutit
+  `--resume`. Följderna: transkriptet ligger utanför konfigrepots whitelist (kontrollerat med
+  `git check-ignore`), det ska **inte** exporteras rakt av till Obsidian, och en ny session i
+  roblocks ska börja från repots `CLAUDE.md` och inte återuppta den gamla – en återupptagen
+  session läser jobbets regler som sin egen historik.
 
 **Ett undantag, och bara ett: inferensen går genom jobbets Vertex.** Valt 2026-08-26 och inte
 en glömska. Det betyder att varje prompt och svar går via jobbets

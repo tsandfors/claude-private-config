@@ -13,8 +13,29 @@
 # att man minns att skriva det, och glömmer man läser verktyget jobbets
 # konfiguration utan att säga ifrån.
 
-# Privat projekt: att-gora. Villkoret sitter på katalogen och inte på
-# kommandonamnet, och den skillnaden är hela omskrivningen 2026-09-05.
+# Privata projekt: hela ~/ts_projects, katalogen själv och allt under den.
+#
+# Fram till 2026-10-12 var trädet bara ~/ts_projects/att-gora, eftersom
+# jobbrepot motor-pro-import-api låg bredvid. Samma dag byggdes ett andra
+# privat projekt, roblocks, och hela sessionen gick på jobbets konfiguration -
+# villkoret kände inte till det, och ingenting sade ifrån. Jobbklonen raderades
+# och gränsen flyttade upp en nivå. ts_projects själv räknas med, för
+# originalbygget 13-15 augusti startades därifrån.
+#
+# Villkoret står en gång, i _private_tree, och de tre funktionerna frågar den.
+# Tre kopior hade glidit isär första gången någon rättade en av dem. Det är
+# två jämförelser och inte ett prefix med *, för "$HOME/ts_projects"* hade
+# också släppt in ~/ts_projects2 - och det gamla "…/att-gora"* släppte in
+# ~/ts_projects/att-gora-kopia.
+#
+# Lägg aldrig ett jobbrepo under ~/ts_projects igen. Gör någon det kör det på
+# den privata konfigurationen utan ett ord, alltså samma läcka åt andra hållet.
+_private_tree() {
+  [[ "$PWD" == "$HOME/ts_projects" || "$PWD" == "$HOME/ts_projects/"* ]]
+}
+
+# Villkoret sitter på katalogen och inte på kommandonamnet, och den skillnaden
+# är hela omskrivningen 2026-09-05.
 #
 # Fram till dess fanns bara `claude()` nedan. Den vaktade namnet `claude` - men
 # `~/bin/claude-latest` pekar på en andra installation i `~/.local/bin` och
@@ -38,7 +59,7 @@
 # skilja från en vi själva hade hittat på. Att tyst förstöra någon annans
 # inställning är precis den sortens fel hela den här omskrivningen handlar om.
 _private_claude_config() {
-  if [[ "$PWD" == "$HOME/ts_projects/att-gora"* ]]; then
+  if _private_tree; then
     if [[ "${CLAUDE_CONFIG_DIR-}" != "$HOME/.claude-private" ]]; then
       if [[ -n "${CLAUDE_CONFIG_DIR-}" ]]; then
         _private_claude_config_outside="$CLAUDE_CONFIG_DIR"
@@ -67,7 +88,7 @@ _private_claude_config
 # `claude-stable()` bredvid vore däremot att räkna upp namn igen, alltså precis
 # det fel som just rättades.
 claude() {
-  if [[ "$PWD" == "$HOME/ts_projects/att-gora"* ]]; then
+  if _private_tree; then
     CLAUDE_CONFIG_DIR="$HOME/.claude-private" command claude "$@"
   else
     command claude "$@"
@@ -123,7 +144,7 @@ claude() {
 # installationer av claude som gjorde namnvakten otillräcklig, och det finns
 # inget `gh-latest`. Dyker det upp en är det här raden som ska läsas om.
 gh() {
-  if [[ "$PWD" == "$HOME/ts_projects/att-gora"* ]]; then
+  if _private_tree; then
     local gh_token_file="$HOME/.claude-private/gh/token"
     local gh_token=""
     [[ -r "$gh_token_file" ]] && gh_token="$(<"$gh_token_file")"
