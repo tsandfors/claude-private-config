@@ -150,8 +150,13 @@ var och därför lätta att radera av misstag.
      *Fine-grained tokens*.
   2. **Resource owner** `tsandfors`, **Repository access** *Only select repositories* →
      `tsandfors/att-gora`, och ett **Expiration**-datum.
-  3. **Repository permissions**: *Contents* och *Pull requests* på **Read and write**,
-     *Metadata* på *Read-only* (sätts automatiskt). *Actions: Read-only* om `gh run` ska gå.
+  3. **Repository permissions**: *Contents*, *Issues* och *Pull requests* på **Read and
+     write**, *Metadata* på *Read-only* (sätts automatiskt), och *Actions* på **Read-only**
+     sedan 2026-10-12 – utan den svarar `gh run` och `actions/runs` 403, och CI:ns utfall går
+     inte att läsa härifrån. Gränssnittet listar bara beviljade rättigheter, så en ny läggs
+     till med **Add permissions**. *Issues* stod inte här förut men satt på tokenen; Tomas
+     behöll den med avsikt samma dag. *Workflows* och *Administration* behövs inte: workflowen
+     pushas över ssh, och repots Actions-inställningar kontrolleras i webbläsaren.
   4. Kopiera värdet. Det börjar med `github_pat_`; `ghp_` är den gamla *classic*-varianten.
 
   **Skriv in den i en vanlig terminal och inte i en Claude-prompt.** `!`-prefixet kör
