@@ -108,8 +108,9 @@ var och därför lätta att radera av misstag.
 
   **Två ytor bär variablerna, och det är med avsikt.** En `gh()`-funktion i
   `~/.claude-private/shell/functions.zsh`, byggd
-  precis som `claude()` bredvid den, täcker terminalen och därmed också Bash-anrop i en session
-  – funktionen är katalogbunden till projektträdet, så jobbets `gh` är orört utanför det (mätt
+  precis som `claude()` bredvid den, täcker terminalen och därmed också Bash-anrop i en session,
+  men bara via Claude Codes ögonblicksbild av skalet, med de fällor som står under *Trädet är
+  hela `~/ts_projects`* nedan – funktionen är katalogbunden till projektträdet, så jobbets `gh` är orört utanför det (mätt
   åt bägge håll). Och `GH_CONFIG_DIR` plus `GH_HOST` ligger dessutom i
   `~/.claude-private/settings.json`, som gäller varje privat session i **varje** privat repo,
   alltså även där funktionen inte slår till. Ingen av dem bär hemligheten.
@@ -220,7 +221,7 @@ var och därför lätta att radera av misstag.
   att-gora. Jobbklonen raderades och gränsen flyttade upp en nivå. `ts_projects` själv räknas
   med, för originalbygget 13–15 augusti startades därifrån.
 
-  Villkoret står nu **en gång**, i `_private_tree`, och `_private_claude_config`, `claude()` och
+  Villkoret står nu **en gång**, i `private_tree`, och `_private_claude_config`, `claude()` och
   `gh()` frågar den – tre kopior hade glidit isär första gången någon rättade en av dem. Det är
   två jämförelser och inte ett prefix med `*`: `"$HOME/ts_projects"*` hade släppt in
   `~/ts_projects2`, och det gamla `"…/att-gora"*` släppte in `att-gora-kopia`. **`gh()` följde
@@ -231,11 +232,25 @@ var och därför lätta att radera av misstag.
   `cd` in i `ts_projects` själv, i `roblocks`, djupare ner i `att-gora`, ut igen, skalstart i
   `roblocks`, i `ts_projects`, utanför och i `ts_projects2`, besök från privat till privat, ett
   handsatt värde som överlever, `claude()` utan exporten, och `gh()` på bägge sidor om gränsen.
-  **Två fel i provet, inget i funktionen.** Första körningen ärvde sessionens egen
+  **Två fel i provet, inget i villkoret** – men ett i namnet, se nästa stycke. Första körningen ärvde sessionens egen
   `CLAUDE_CONFIG_DIR` och `GH_CONFIG_DIR` och visade dem i stället för *osatt* – därav `env -i`.
   Den andra lade `HOME` under `/tmp`, som är en symlänk till `/private/tmp`; utan ärvd `PWD`
   räknar zsh fram den fysiska sökvägen, och skalstartsfallen föll. Den riktiga hemkatalogen har
   ingen symlänk, och med en fysisk `HOME` gick de igenom.
+
+  **Provet mätte terminalen och inte en session, och funktionen hette först `_private_tree`.**
+  Claude Code läser inte `functions.zsh` vid varje Bash-anrop. Den tar en ögonblicksbild av
+  skalets funktioner vid sessionsstart (`<config>/shell-snapshots/`), och funktioner vars namn
+  börjar med `_` kommer inte med. `gh ()` och `claude ()` fanns i ögonblicksbilden med anropet
+  `if _private_tree`, men själva hjälpfunktionen saknades. Varje `gh` från en session svarade
+  `gh:1: command not found: _private_tree`, villkoret blev falskt, och `gh()` tog
+  `command gh`-grenen. I en jobbsession är det rätt gren, och där märktes det samma kväll, som
+  brus. I en privat session hoppade det över tokenen och vägran: kvar fanns bara
+  `GH_CONFIG_DIR` och `GH_HOST` ur `settings.json`, utan `GH_TOKEN`, alltså vägen till
+  nyckelringen. Omdöpt till `private_tree` 2026-10-12. Den gamla villkorskopian inuti varje
+  funktion hade aldrig haft problemet, så det var den nya, delade funktionen som öppnade hålet.
+  **En ändring i `functions.zsh` når bara sessioner som startas efter den**, och ett prov i
+  `zsh -f` säger inget om ögonblicksbilden. Det provet görs från en ny session.
 
   **Den nya gränsen har en egen fälla: ett jobbrepo under `~/ts_projects` kör på den privata
   konfigurationen utan ett ord.** Alltså samma läcka åt andra hållet. Kloner av jobbrepon hör

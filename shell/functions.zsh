@@ -22,7 +22,7 @@
 # och gränsen flyttade upp en nivå. ts_projects själv räknas med, för
 # originalbygget 13-15 augusti startades därifrån.
 #
-# Villkoret står en gång, i _private_tree, och de tre funktionerna frågar den.
+# Villkoret står en gång, i private_tree, och de tre funktionerna frågar den.
 # Tre kopior hade glidit isär första gången någon rättade en av dem. Det är
 # två jämförelser och inte ett prefix med *, för "$HOME/ts_projects"* hade
 # också släppt in ~/ts_projects2 - och det gamla "…/att-gora"* släppte in
@@ -30,7 +30,16 @@
 #
 # Lägg aldrig ett jobbrepo under ~/ts_projects igen. Gör någon det kör det på
 # den privata konfigurationen utan ett ord, alltså samma läcka åt andra hållet.
-_private_tree() {
+#
+# Namnet får inte börja med _. Claude Code läser inte den här filen vid varje
+# Bash-anrop utan tar en ögonblicksbild av skalets funktioner vid sessionsstart,
+# och den hoppar över namn som börjar med understreck. Samma kväll som
+# funktionen skrevs hette den _private_tree: gh() och claude() kom med i
+# ögonblicksbilden, men inte den. Varje gh-anrop från en session svarade då
+# "command not found", villkoret blev falskt, och i det privata trädet gick gh
+# förbi tokenen till command gh, alltså jobbets väg. Det märktes som brus i en
+# jobbsession, inte som ett fel i en privat.
+private_tree() {
   [[ "$PWD" == "$HOME/ts_projects" || "$PWD" == "$HOME/ts_projects/"* ]]
 }
 
@@ -59,7 +68,7 @@ _private_tree() {
 # skilja från en vi själva hade hittat på. Att tyst förstöra någon annans
 # inställning är precis den sortens fel hela den här omskrivningen handlar om.
 _private_claude_config() {
-  if _private_tree; then
+  if private_tree; then
     if [[ "${CLAUDE_CONFIG_DIR-}" != "$HOME/.claude-private" ]]; then
       if [[ -n "${CLAUDE_CONFIG_DIR-}" ]]; then
         _private_claude_config_outside="$CLAUDE_CONFIG_DIR"
@@ -88,7 +97,7 @@ _private_claude_config
 # `claude-stable()` bredvid vore däremot att räkna upp namn igen, alltså precis
 # det fel som just rättades.
 claude() {
-  if _private_tree; then
+  if private_tree; then
     CLAUDE_CONFIG_DIR="$HOME/.claude-private" command claude "$@"
   else
     command claude "$@"
@@ -144,7 +153,7 @@ claude() {
 # installationer av claude som gjorde namnvakten otillräcklig, och det finns
 # inget `gh-latest`. Dyker det upp en är det här raden som ska läsas om.
 gh() {
-  if _private_tree; then
+  if private_tree; then
     local gh_token_file="$HOME/.claude-private/gh/token"
     local gh_token=""
     [[ -r "$gh_token_file" ]] && gh_token="$(<"$gh_token_file")"
