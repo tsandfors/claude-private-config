@@ -433,7 +433,40 @@ var och därför lätta att radera av misstag.
   roblocks ska börja från repots `CLAUDE.md` och inte återuppta den gamla – en återupptagen
   session läser jobbets regler som sin egen historik.
 
-**Ett undantag, och bara ett: inferensen går genom jobbets Vertex.** Valt 2026-08-26 och inte
+**Två undantag, och bara två.** Det äldre är Vertex, längre ner. Det nyare är valt av Tomas
+2026-10-12 och går åt andra hållet: **jobbets konfiguration känner till att `~/ts_projects`
+finns.** Fördelarna uppväger nackdelen, var hans ord, och det är ett beslut och ingen glidning.
+
+- **En SessionStart-hook i jobbets `~/.claude/settings.json`, först i listan och inline.** Den
+  läser `cwd`, och står sessionen i `~/ts_projects` eller under den säger den till: till Tomas
+  med `systemMessage` – *FEL KONFIGURATION … Avsluta nu, öppna en ny terminalflik (eller kör
+  source ~/.zshrc)* – och till modellen med `additionalContext`, som säger åt den att inte skriva
+  filer, minnen eller köra kommandon. Inline och inte som ett skript i jobbets `bin/`, så att
+  undantaget är en rad och inte en fil till. Säkerhetskopian före ändringen är
+  `~/.claude/settings.json.bak-20261012-tsprojects`.
+- **Den bor i jobbets konfiguration för att det är det enda lager som läses när det gått fel.**
+  En vakt i `~/.claude-private/` tiger just när den behövs, och en vakt per repo – som
+  `config-guard.py` i att-gora – finns inte i ett nytt projekt, och roblocks var ett nytt
+  projekt. **`settings.json` läses dessutom inte uppåt**, till skillnad från `CLAUDE.md`: mätt
+  2026-10-12 med en hook i en förälders `.claude/settings.json` – den körde i föräldern själv
+  (positiv kontroll) men varken i ett barn med eget git eller i ett utan. En
+  `~/ts_projects/.claude/settings.json` hade alltså bara gällt sessioner startade i
+  `ts_projects` själv.
+- **Den tiger i jobbsessioner, och det bryter mot att-goras regel att en vakt talar i bägge
+  lägena.** Med avsikt: en rad om det privata trädet i varje jobbsession vore själva läckan
+  den finns för att stoppa, och felläget är skarpt avgränsat. Priset är att en vakt som slutat
+  fungera inte märks – **mät om den** när jobbets `settings.json` byts ut eller Claude Code
+  ändrar hookformatet.
+- **Den kan inte stoppa något.** SessionStart kan inte neka en session, och jobbets egna
+  SessionStart-hookar, PR-granskningen mot jobbets värd bland dem, har redan kört när den talar.
+  Förebyggandet är fortfarande `chpwd`-hooken; det här är larmet när den inte slog till.
+- **Mätt 2026-10-12.** Kommandot enhetsprovat för `ts_projects`, `roblocks`, `ts_projects2`,
+  `claude_space` och trasig indata. Sedan en riktig session på jobbets konfiguration i en
+  påhittad katalog, `~/ts_projects/hookprov-tmp`, startad med de privata variablerna borttagna
+  ur miljön så att den privata tokenen inte nådde jobbets hookar: modellen återgav varningen.
+  Katalogen, transkriptet och `session-env` raderades efteråt, noll träffar kvar.
+
+**Vertex: inferensen går genom jobbets Vertex.** Valt 2026-08-26 och inte
 en glömska. Det betyder att varje prompt och svar går via jobbets
 GCP-projekt; OTel-exporten till jobbets kollektor följer däremot *inte* med, för
 den satt i `settings.json` som inte längre läses.
