@@ -35,6 +35,7 @@ detsamma — jobbets 94 minnen hör inte hit.
 - [Räkneord ruttnar tystast](rakneord-ruttnar-tystast.md) — greppa talen först vid en dokumentgranskning; stryk hellre talet än uppdatera det
 - [Korrigera, inte bara komplettera](korrigera-inte-bara-komplettera.md) — gör ett motsägelsesvep före "klart"; riv upp gamla påståenden, lägg inte bara till
 - [En instruktion är ingen spärr](instruktion-ar-ingen-sparr.md) — bruten rutin flyttas till harnesset, inte skrivs om tydligare
+- [En spärr i skalet slipper parsern](en-sparr-i-skalet-slipper-parsern.md) — en skalfunktion ser argumenten efter skalets tolkning; ingen parserkopia, men andra hål
 - [En underkatalogs CLAUDE.md laddas bara vid Read](en-underkatalogs-claude-md-laddas-bara-vid-read.md) — inte vid sed/cat, Grep eller heredoc; pekaren i roten måste säga det, och bara regler som enbart gäller katalogen hör hemma där
 - [Skalets ögonblicksbild är inte terminalen](skalets-ogonblicksbild-ar-inte-terminalen.md) — sessionens Bash tappar `_`-funktioner och ser bara profilen från sessionsstart; prova från en ny session
 - [settings.json läses inte uppåt](settings-json-lases-inte-uppat.md) — CLAUDE.md läses i varje förälder, settings.json bara i startkatalogen; en vakt per träd kan inte ligga i trädets rot
@@ -55,6 +56,7 @@ detsamma — jobbets 94 minnen hör inte hit.
 - [Ett fynd kan vara priset för ett val](ett-fynd-kan-vara-priset-for-ett-val.md) — fråga vad lagningen tar ifrån ett redan gjort val; den minsta lagningen som lämnar valet orört
 - [En granskning kan be om att ångra förra](en-granskning-kan-be-om-att-angra-forra.md) — jämför fyndet mot `main` och mot tidigare lagningar innan det lagas; annars felloop
 - [Fråga hur troligt utgångsläget är](fraga-hur-troligt-utgangslaget-ar.md) — ett verkligt fynd i ett osannolikt scenario lagas inte och skrivs inte upp; sannolikheten först
+- [Beskriv resultatet i klick](beskriv-resultatet-i-klick.md) — säg var knappen sitter och vart klicket leder innan bygget; ett spec-ord kan betyda något annat för användaren
 
 ## Öppna spår
 
