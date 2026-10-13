@@ -107,8 +107,9 @@ var och därför lätta att radera av misstag.
     strukturellt inte nå den. Sätts `GH_ENTERPRISE_TOKEN` faller den spärren.
 
   **De två första nekas av `gh()` själv sedan 2026-10-13**, tillsammans med `gh auth refresh`
-  och `logout` (nyckelringen igen) och `gh auth token` (hemligheten i klartext i ett
-  transkript). Fram till dess nekades de fem av att-goras `PreToolUse`-hook, regel 3 i
+  och `logout` (nyckelringen igen), `gh auth token` (hemligheten i klartext i ett
+  transkript) och `gh auth status --show-token`, som skriver samma hemlighet. Den sista
+  släppte hooken igenom, eftersom `gh auth status` stod i dess tillåt-tabell. Fram till dess nekades de fem av att-goras `PreToolUse`-hook, regel 3 i
   `bash-guard.py` – som bara gällde i att-gora, medan isoleringen gällde i hela
   `~/ts_projects`. Gapet öppnades 2026-10-12 när roblocks blev det andra privata repot.
 

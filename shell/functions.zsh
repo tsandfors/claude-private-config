@@ -170,7 +170,9 @@ claude() {
 # gitconfigen. token skriver hemligheten i klartext, i ett transkript som
 # sparas. Tre skäl och tre svar, för en enda tillsägelse hade passat ingen av
 # dem. Allt annat gh kan går igenom, `gh auth status` också - det är så man
-# kontrollerar att isoleringen håller.
+# kontrollerar att isoleringen håller - men inte med -t eller --show-token, som
+# skriver samma hemlighet som `gh auth token`. Hålet fanns i hooken också och
+# stängdes samma dag som spärren flyttade hit.
 #
 # Vad den inte når, så att ingen litar på den längre än den räcker: `command
 # gh`, en absolut sökväg till binären, och `bash -c` eller ett skript, där
@@ -200,6 +202,11 @@ gh() {
       "auth token")
         gh_why="skriver den privata token i klartext, och transkriptet sparas.
     Vill du bara veta att den finns: \`test -s ~/.claude-private/gh/token\`." ;;
+      "auth status")
+        if (( ${argv[(I)(-t|--show-token|--show-token=*)]} )); then
+          gh_why="med -t skriver den privata token i klartext, och transkriptet sparas.
+    Utan -t visar den kontot och inte tokenen: \`gh auth status\`."
+        fi ;;
     esac
     if [[ -n "$gh_why" ]]; then
       print -u2 "gh: \`gh $gh_step\` $gh_why"

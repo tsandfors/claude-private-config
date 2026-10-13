@@ -70,6 +70,9 @@ refused=(
   'x=$(gh auth token)'                         "test -s"
   'eval "gh auth token"'                       "test -s"
   'true && gh auth setup-git'                  "ssh"
+  "gh auth status -t"                          "Utan -t"
+  "gh auth status --show-token"                "Utan -t"
+  "gh auth status --hostname github.com -t"    "Utan -t"
 )
 for command advice in "${refused[@]}"; do
   attempt "$command"
