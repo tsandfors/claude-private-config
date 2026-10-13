@@ -38,6 +38,12 @@
 !shell/
 !shell/**
 
+# Pre-commit-hooken som kör provet för gh() i shell/, sedan 2026-10-13. Kopplad
+# med core.hooksPath, så den är versionerad i stället för att ligga i .git/hooks
+# där ingenting följer med.
+!githooks/
+!githooks/**
+
 # Den riktiga settings.json är redan ignorerad av `*` ovan. Raden står här ändå, för avsikten
 # ska gå att läsa utan att härledas: filen bär arbetsgivarens GCP-projektnamn och
 # hemkatalogens absoluta sökväg, och får därför inte versionshanteras. settings.example.json

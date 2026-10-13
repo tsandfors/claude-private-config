@@ -152,8 +152,59 @@ claude() {
 # det. Och gh har ingen andra ingång på den här maskinen: det var två
 # installationer av claude som gjorde namnvakten otillräcklig, och det finns
 # inget `gh-latest`. Dyker det upp en är det här raden som ska läsas om.
+#
+# Fem underkommandon nekas här, och de nekades förut av en PreToolUse-hook i
+# att-gora (bash-guard.py, regel 3) - som bara gällde i att-gora. Den 2026-10-12
+# blev roblocks det andra privata repot och gapet var öppet: isoleringen följde
+# med dit, spärren gjorde det inte. Spärren flyttade hit 2026-10-13 i stället
+# för till en hook i konfigrepot, och skälet är parsern. En hook får
+# kommandoraden som en sträng och måste gissa vad skalet kommer att köra, så
+# `git commit -m "... gh auth login ..."` måste släppas igenom medan
+# `x && gh auth token` inte får det - att-goras hook bär sextio rader för just
+# det, och en kopia här hade varit två parsrar som glider isär. Här har skalet
+# redan svarat: funktionen anropas bara när gh faktiskt körs, och "$@" är
+# argumenten som de blev.
+#
+# Login, refresh och logout skriver till systemets nyckelring, som GH_CONFIG_DIR
+# inte isolerar. setup-git skriver en credential helper till den globala
+# gitconfigen. token skriver hemligheten i klartext, i ett transkript som
+# sparas. Tre skäl och tre svar, för en enda tillsägelse hade passat ingen av
+# dem. Allt annat gh kan går igenom, `gh auth status` också - det är så man
+# kontrollerar att isoleringen håller.
+#
+# Vad den inte når, så att ingen litar på den längre än den räcker: `command
+# gh`, en absolut sökväg till binären, och `bash -c` eller ett skript, där
+# funktionen inte finns. Den fångar å andra sidan eval, ett kommando i en
+# variabel och ett alias, som hooken inte kunde se. Det är en vakt mot en
+# glidning och inte mot en motståndare, precis som hooken var.
+#
+# Jämförelsen är de två första argumenten, och flaggorna filtreras inte bort
+# först fast hooken gjorde det. Mätt med en mutation: filtret spelar bara roll
+# för en flagga utan värde *före* underkommandot, och gh har ingen sådan som
+# leder till de fem - så grenen gick inte att få röd, och en gren inget prov
+# kan nå säger ingenting.
 gh() {
   if private_tree; then
+    local gh_step="${1-} ${2-}"
+    local gh_why=""
+    case "$gh_step" in
+      "auth login"|"auth refresh"|"auth logout")
+        gh_why="skriver kontot till systemets nyckelring, som delas med jobbet.
+    GH_TOKEN-arrangemanget finns för att slippa just det. Behöver du byta token:
+    skriv den till ~/.claude-private/gh/token - se SKOTT.md, Så skapas token.
+    Är en riktig inloggning ändå avsikten är det Tomas som gör den, med
+    \`command gh\`, som går förbi den här funktionen." ;;
+      "auth setup-git")
+        gh_why="skriver en credential helper till den globala gitconfigen, som delas
+    med jobbet. Repona går över ssh via värdalias och behöver ingen helper." ;;
+      "auth token")
+        gh_why="skriver den privata token i klartext, och transkriptet sparas.
+    Vill du bara veta att den finns: \`test -s ~/.claude-private/gh/token\`." ;;
+    esac
+    if [[ -n "$gh_why" ]]; then
+      print -u2 "gh: \`gh $gh_step\` $gh_why"
+      return 1
+    fi
     local gh_token_file="$HOME/.claude-private/gh/token"
     local gh_token=""
     [[ -r "$gh_token_file" ]] && gh_token="$(<"$gh_token_file")"
@@ -161,7 +212,7 @@ gh() {
     if [[ -z "$gh_token" ]]; then
       print -u2 "gh: ingen privat token i $gh_token_file."
       print -u2 "    Vägrar köra, eftersom alternativet är jobbets konto."
-      print -u2 "    Så skapas och skrivs en ny: att-gora/CLAUDE.md, Täta skott mot jobbet."
+      print -u2 "    Så skapas och skrivs en ny: ~/.claude-private/SKOTT.md, Så skapas token."
       return 1
     fi
     GH_CONFIG_DIR="$HOME/.claude-private/gh" \

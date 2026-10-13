@@ -106,6 +106,28 @@ var och därför lätta att radera av misstag.
     värd är en sådan (noll träffar på `ghe.com` i `hosts.yml`), så den privata token kan
     strukturellt inte nå den. Sätts `GH_ENTERPRISE_TOKEN` faller den spärren.
 
+  **De två första nekas av `gh()` själv sedan 2026-10-13**, tillsammans med `gh auth refresh`
+  och `logout` (nyckelringen igen) och `gh auth token` (hemligheten i klartext i ett
+  transkript). Fram till dess nekades de fem av att-goras `PreToolUse`-hook, regel 3 i
+  `bash-guard.py` – som bara gällde i att-gora, medan isoleringen gällde i hela
+  `~/ts_projects`. Gapet öppnades 2026-10-12 när roblocks blev det andra privata repot.
+
+  **Spärren flyttade till funktionen och inte till en hook i konfigrepot, och skälet är
+  parsern.** En hook får kommandoraden som en sträng och måste gissa vad skalet kommer att
+  köra – att-goras bär sextio rader för att `git commit -m "… gh auth login …"` ska gå igenom
+  medan `x && gh auth token` inte gör det – och en hook här hade behövt en kopia av dem. Två
+  parsrar som måste tycka likadant är den glidning det här repot redan beskrivit två gånger.
+  I funktionen har skalet redan svarat: den anropas bara när gh faktiskt körs. Det lättare
+  alternativet, att låta att-gora importera en parser härifrån, föll inte på undantagstestet
+  utan på att att-goras svit kör i en container som bara ser repot.
+
+  **Hålen är andra än hookens, inte färre.** `command gh`, en absolut sökväg och `bash -c`
+  går förbi funktionen – hooken fångade de tre. Funktionen fångar i stället `eval`, ett
+  kommando i en variabel och ett alias, och gäller i Tomas egen terminal och för `!`-kommandon,
+  där hooken aldrig gällde. Vägen förbi för den som verkligen menar det är `command gh`, och
+  nejet säger det. Provet är `shell/test-gh.zsh`, och `githooks/pre-commit` kör det före
+  varje commit här – sedan `git config core.hooksPath githooks`, som inte följer med en klon.
+
   **Två ytor bär variablerna, och det är med avsikt.** En `gh()`-funktion i
   `~/.claude-private/shell/functions.zsh`, byggd
   precis som `claude()` bredvid den, täcker terminalen och därmed också Bash-anrop i en session,

@@ -1,0 +1,14 @@
+#!/bin/sh
+# Kör provet för gh() före varje commit i konfigrepot.
+#
+# Provet bodde i att-goras testsvit så länge spärren gjorde det, och där körde
+# `yarn test:full` det av sig självt. Spärren flyttade till shell/functions.zsh
+# 2026-10-13, och det här repot har varken svit eller CI - ett prov man ska
+# komma ihåg att köra är en bön och ingen spärr. En commit är det enda tillfälle
+# funktionen kan gå sönder på, och provet tar under en sekund, så det körs
+# varje gång i stället för bara när shell/ är rörd: villkoret hade varit en gren
+# till, för att spara en sekund ingen märker.
+#
+# Kopplas med `git config core.hooksPath githooks`, som är lokal konfiguration
+# och inte följer med en klon - därför står raden i README:s uppsättningssteg.
+exec zsh -f "$(git rev-parse --show-toplevel)/shell/test-gh.zsh"

@@ -18,6 +18,9 @@ remote – sessionstranskript, prompthistorik, filsnapshots, cache – och det �
 | `bin/claude-version-check.sh` | Hämtar senaste versionen detached, max var sjätte timme, till `cache/`. |
 | `bin/session-start-orientation.sh` | `SessionStart`-hook: injicerar projektets *Var man börjar* ur `BACKLOG.md`. |
 | `bin/check-memory.py` | Underkänner minnen med saknat eller okänt `scope`, och index som inte stämmer. |
+| `shell/functions.zsh` | `claude()`, `gh()` och `chpwd`-hooken. Sourcas från `~/.zshrc`. `gh()` bär också de fem nejen som förut var att-goras regel 3. |
+| `shell/test-gh.zsh` | Provet för `gh()`: nejen, det som ska gå igenom, och gränsen mot jobbets `gh`. |
+| `githooks/pre-commit` | Kör provet före varje commit här. |
 | `memory/` | Minneslagret, gemensamt för alla privata repon. `scope` i varje fil säger var minnet gäller. |
 | `repos.txt` | De privata repona. Listan `check-memory.py` validerar `scope` mot. |
 | `settings.example.json` | Mall – se nedan. |
@@ -50,8 +53,10 @@ globen `**/.claude/CLAUDE.md` – den senare hade tystat framtida privata repons
 4. `claude()`-funktionen i `~/.zshrc` sätter `CLAUDE_CONFIG_DIR` automatiskt i projektträdet.
    En funktion och inte ett alias: ett alias kräver att man minns att skriva det, och en glömd
    session läser tyst jobbets konfiguration.
-5. Verifiera: `python3 bin/check-memory.py` ska ge exit 0, och statusraden ska visa
-   `● privat` längst till vänster.
+5. `git config core.hooksPath githooks` – kopplar pre-commit-hooken. Det är lokal
+   konfiguration och följer inte med klonen, och utan den körs provet för `gh()` aldrig.
+6. Verifiera: `python3 bin/check-memory.py` ska ge exit 0, `zsh -f shell/test-gh.zsh` ska
+   säga *alla gröna*, och statusraden ska visa `● privat` längst till vänster.
 
 ## Kör aldrig `git clean` här
 
