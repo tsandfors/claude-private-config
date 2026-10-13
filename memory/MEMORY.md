@@ -51,11 +51,14 @@ detsamma — jobbets 94 minnen hör inte hit.
 - [Mina uppslag rankas inte](mina-uppslag-rankas-inte.md) — egna idéer sägs i samtalet, aldrig i användarens kö; placeringen slår brasklappen
 - [Förklara brus där granskningen letar](forklara-brus-dar-granskningen-letar.md) — ofarligt brus återupptäcks som fynd; säg också om en notering är en uppmaning eller inte
 - [Ett steg kan lämna ett trasigt mellanläge](ett-steg-kan-lamna-ett-trasigt-mellanlage.md) — namnge fönstret där appen är sämre än före; låt det styra ordningen på resten
+- [En annotering skuggar fältet](en-annotering-skuggar-faltet.md) — i Django läser F("x") aggregatet om en annotering heter x; ge summor egna alias
 - [Ett villkor kan låsa tillståndet inifrån](ett-villkor-kan-lasa-tillstandet-inifran.md) — döljer jag vägen ut ur ett tillstånd blir tillståndet permanent; räkna övergångarna
 - [Ett namn som inte skiljer är ett halvt namn](ett-namn-som-inte-skiljer-ar-ett-halvt-namn.md) — tre knappar kan heta likadant och passera ett namnsvep; disambiguering i en selektor är ett fynd
 - [Ett fynd kan vara priset för ett val](ett-fynd-kan-vara-priset-for-ett-val.md) — fråga vad lagningen tar ifrån ett redan gjort val; den minsta lagningen som lämnar valet orört
 - [En granskning kan be om att ångra förra](en-granskning-kan-be-om-att-angra-forra.md) — jämför fyndet mot `main` och mot tidigare lagningar innan det lagas; annars felloop
 - [Fråga hur troligt utgångsläget är](fraga-hur-troligt-utgangslaget-ar.md) — ett verkligt fynd i ett osannolikt scenario lagas inte och skrivs inte upp; sannolikheten först
+- [Ett tomt läge kan vara användarens vanliga](ett-tomt-lage-kan-vara-anvandarens-vanliga.md) — mät den riktiga användarens data innan en funktion döljs när underlaget saknas
+- [Berömmet är funktion](beromet-ar-funktion.md) — uppmuntran stryks inte för att förenkla; dela i nivåer så den alltid är sann och varm
 - [Beskriv resultatet i klick](beskriv-resultatet-i-klick.md) — säg var knappen sitter och vart klicket leder innan bygget; ett spec-ord kan betyda något annat för användaren
 
 ## Öppna spår
@@ -106,7 +109,7 @@ detsamma — jobbets 94 minnen hör inte hit.
 ## att-gora
 
 - [Databasen är slängbar](databasen-ar-slangbar.md) — migrationssvårighet är inget argument här; villkorslöst sedan syftesbytet 2026-08-28
-- [Demomaskinen](demomaskinen.md) — tomass@192.168.50.120, repot i ~/dev/git/private/test_https/att-gora, :8080; scp-raden för filmen
+- [Demomaskinen](demomaskinen.md) — tomass@192.168.50.120, repot i ~/dev/git/private/test_https/att-gora, :8080; står på `startsida`, ingen ssh-nyckel härifrån
 - [Frun når inte demon](frun-nar-inte-demon.md) — kontot `pennan` är klart, men hennes Mac når inte `192.168.50.120:8080`; två okörda steg kvar, olöst 2026-09-30
 - [branch-guard rapporterar origin/HEAD](branch-guard-rapporterar-origin-head.md) — falsk branch `origin` när lokal main ligger efter; känd, olagad
 
