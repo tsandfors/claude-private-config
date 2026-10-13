@@ -36,6 +36,8 @@ detsamma — jobbets 94 minnen hör inte hit.
 - [Korrigera, inte bara komplettera](korrigera-inte-bara-komplettera.md) — gör ett motsägelsesvep före "klart"; riv upp gamla påståenden, lägg inte bara till
 - [En instruktion är ingen spärr](instruktion-ar-ingen-sparr.md) — bruten rutin flyttas till harnesset, inte skrivs om tydligare
 - [En underkatalogs CLAUDE.md laddas bara vid Read](en-underkatalogs-claude-md-laddas-bara-vid-read.md) — inte vid sed/cat, Grep eller heredoc; pekaren i roten måste säga det, och bara regler som enbart gäller katalogen hör hemma där
+- [Skalets ögonblicksbild är inte terminalen](skalets-ogonblicksbild-ar-inte-terminalen.md) — sessionens Bash tappar `_`-funktioner och ser bara profilen från sessionsstart; prova från en ny session
+- [settings.json läses inte uppåt](settings-json-lases-inte-uppat.md) — CLAUDE.md läses i varje förälder, settings.json bara i startkatalogen; en vakt per träd kan inte ligga i trädets rot
 - [Ett fel sitter sällan ensamt](ett-fel-sitter-sallan-ensamt.md) — greppa efter mönstret så fort jag kan formulera det; börja i filen jag står i
 - [Räkna omfattningen före spec](rakna-omfattningen-fore-spec.md) — ett önskemål gäller ofta färre ställen än det låter, och siffran ändrar vad det betyder
 - [En spec är inte sann för att den är skriven](en-spec-ar-inte-sann-for-att-den-ar-skriven.md) — fråga om regeln är sann som den står innan jag kodar den, inte bara hur den ska kodas
@@ -108,4 +110,4 @@ detsamma — jobbets 94 minnen hör inte hit.
 
 ## roblocks
 
-- [Äggön](roblocks.md) — Roblox-simulatorn: Rojo + Lune, `scripts/check.sh`, sonen testar `dist/Aggon.rbxl` på Windows, rebirth-kravet 400 mdr intjänade
+- [Äggön](roblocks.md) — Roblox-simulatorn: Rojo + Lune, `scripts/check.sh`, sonen (18, beställare, inte ett barn) testar `dist/Aggon.rbxl` på Windows, rebirth-kravet 400 mdr intjänade
