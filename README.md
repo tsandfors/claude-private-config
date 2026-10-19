@@ -27,17 +27,17 @@ remote – sessionstranskript, prompthistorik, filsnapshots, cache – och det �
 
 ## `settings.json` är inte versionshanterad
 
-Den bär två saker som inte får committas, och bägge av samma skäl som resten av arrangemanget
-finns: **arbetsgivarens GCP-projektnamn** (inferensen går genom jobbets Vertex, ett medvetet
-undantag) och **hemkatalogens absoluta sökväg** i `claudeMdExcludes`, som därmed bär
-jobbadressen.
+Den bär **hemkatalogens absoluta sökväg** – i `claudeMdExcludes` och `GH_CONFIG_DIR` – och
+därmed jobbadressen, vilket är samma skäl som resten av arrangemanget finns av. Fram till
+2026-10-19 bar den också arbetsgivarens GCP-projektnamn för Vertex; inferensen går sedan dess
+genom jobbets gateway, som inte behöver någon rad här (se `SKOTT.md`).
 
-`settings.example.json` är samma fil med de två värdena utbytta mot platshållare. På en ny
+`settings.example.json` är samma fil med sökvägarna utbytta mot platshållare. På en ny
 maskin:
 
 ```bash
 cp settings.example.json settings.json
-# fyll i ANTHROPIC_VERTEX_PROJECT_ID och claudeMdExcludes
+# fyll i sökvägarna i claudeMdExcludes och GH_CONFIG_DIR
 ```
 
 `claudeMdExcludes` pekar på jobbets `~/.claude/CLAUDE.md` med **absolut sökväg** och inte med
@@ -47,9 +47,9 @@ globen `**/.claude/CLAUDE.md` – den senare hade tystat framtida privata repons
 ## Att sätta upp på nytt
 
 1. Klona till `~/.claude-private`.
-2. Kopiera mallen till `settings.json` och fyll i de två värdena.
-3. Sätt `CLAUDE_CODE_USE_VERTEX`-autentisering via GCP:s ADC (`~/.config/gcloud/`) – ligger
-   utanför alla konfigkataloger och gäller därför likadant här.
+2. Kopiera mallen till `settings.json` och fyll i sökvägarna.
+3. Starta `claude` och kör `/login` – jobbets MDM-profil pekar all Claude Code på maskinen mot
+   jobbets gateway (Okta). `/status` ska visa *Cloud Gateway*.
 4. `claude()`-funktionen i `~/.zshrc` sätter `CLAUDE_CONFIG_DIR` automatiskt i projektträdet.
    En funktion och inte ett alias: ett alias kräver att man minns att skriva det, och en glömd
    session läser tyst jobbets konfiguration.

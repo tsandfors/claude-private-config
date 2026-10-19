@@ -471,7 +471,7 @@ var och därför lätta att radera av misstag.
   roblocks ska börja från repots `CLAUDE.md` och inte återuppta den gamla – en återupptagen
   session läser jobbets regler som sin egen historik.
 
-**Två undantag, och bara två.** Det äldre är Vertex, längre ner. Det nyare är valt av Tomas
+**Två undantag, och bara två.** Det äldre är inferensen, längre ner. Det nyare är valt av Tomas
 2026-10-12 och går åt andra hållet: **jobbets konfiguration känner till att `~/ts_projects`
 finns.** Fördelarna uppväger nackdelen, var hans ord, och det är ett beslut och ingen glidning.
 
@@ -504,19 +504,33 @@ finns.** Fördelarna uppväger nackdelen, var hans ord, och det är ett beslut o
   ur miljön så att den privata tokenen inte nådde jobbets hookar: modellen återgav varningen.
   Katalogen, transkriptet och `session-env` raderades efteråt, noll träffar kvar.
 
-**Vertex: inferensen går genom jobbets Vertex.** Valt 2026-08-26 och inte
-en glömska. Det betyder att varje prompt och svar går via jobbets
-GCP-projekt; OTel-exporten till jobbets kollektor följer däremot *inte* med, för
-den satt i `settings.json` som inte längre läses.
+**Inferensen går genom jobbets gateway sedan 2026-10-19**, och det är inget val utan ett
+villkor. Vertex-åtkomsten för personliga konton stängdes den dagen, och en MDM-profil i
+`/Library/Managed Preferences/com.anthropic.claudecode.plist` pekar all Claude Code på maskinen
+mot jobbets Claude apps gateway – privat konfiguration eller inte. Inloggningen är `/login`
+mot Okta, och `/status` ska visa *Cloud Gateway*.
 
-- **Vertex-variablerna bor i `~/.claude-private/settings.json` och får inte flytta in i
-  repot.** `ANTHROPIC_VERTEX_PROJECT_ID` namnger arbetsgivarens GCP-projekt, och att committa
-  det vore samma skott brutet åt andra hållet. Det är hela skälet till att just de tre
-  raderna ligger utanför git.
-- **Ingen Anthropic-inloggning behövs.** Vertex autentiserar mot GCP:s ADC i
-  `~/.config/gcloud/`, som ligger utanför alla konfigkataloger och därför gäller likadant i
-  den privata. Byter Vertex-svaret någon gång är det *då* en inloggning tillkommer.
-- **Regionen är `eu` sedan 2026-10-03, och den avgör vilka modeller som finns.** Den privata
+- **Ingen rad i `settings.json` behövs för det**, till skillnad från Vertex. De tre
+  Vertex-variablerna togs bort därifrån och ur `settings.example.json` samma dag.
+- **Gatewayen skickar inställningar tillbaka**, till `~/.claude-private/remote-settings.json`
+  vid varje start: modellistan (`availableModels`, `enforceAvailableModels`), prislistan, plugins
+  och en marketplace, och i `env` modellvariablerna plus **telemetri** –
+  `CLAUDE_CODE_ENABLE_TELEMETRY` och sex `OTEL_*`-variabler med en exportadress. **Det river
+  upp vad som stod här förut**, att OTel-exporten till jobbets kollektor inte följde med. Mätt
+  2026-10-19: `CLAUDE_CODE_ENABLE_TELEMETRY` syns i sessionens skal, `OTEL_*` gör det inte –
+  men skalet är inte processen, så **räkna med att privata sessioners telemetri går till
+  arbetsgivaren**, utöver varje prompt och svar. Det är styrt uppifrån och går inte att stänga
+  av härifrån; lägg inte till egna `OTEL_*`-variabler.
+- **`ANTHROPIC_DEFAULT_*_MODEL` kommer därifrån** och står inte i någon privat fil – sökte man
+  efter dem i `settings.json` hittade man ingenting.
+- **Gatewayen tillåter bara modellerna på sin lista**, och fast mode, Message Batches och Files
+  API fungerar inte genom den.
+
+**Fram till 2026-10-19 gick inferensen genom Vertex**, valt 2026-08-26, med
+`ANTHROPIC_VERTEX_PROJECT_ID` och två variabler till i `settings.json` utanför git och ADC i
+`~/.config/gcloud/` som autentisering. Ett fynd ur den tiden är värt att behålla:
+
+- **Regionen var `eu` från 2026-10-03, och den avgjorde vilka modeller som fanns.** Den privata
   konfigurationen stod på `global`, och följden var att `/model` bara erbjöd `claude-opus-5[1m]`
   – Claude Code sonderar Vertex vid uppstart och seedar `ANTHROPIC_DEFAULT_OPUS_MODEL` med vad
   den hittar, så den tomma väljaren såg ut som att projektet saknade Opus 5.5. **Det stämde
@@ -526,20 +540,16 @@ den satt i `settings.json` som inte längre läses.
   väljare är ett svar om vägen dit, inte om vad som finns i andra änden.** Jag hann dra fel
   slutsats – att grinden satt i projektets Model Garden – innan jobbfilen lästes.
 
-  Två följder att känna till. **Multi-region kostar 10 % mer än `global`** enligt Vertex egen
-  dokumentation, och notan går till arbetsgivarens projekt, alltså är det här undantaget nu
-  något dyrare än det var. Och **`modelSettings` är nycklad per modell-id**, så `effortLevel`
-  slutade gälla i tysthet när modellen byttes – nyckeln heter `claude-opus-5-5` nu, satt till
-  `high` för att spegla jobbets.
+  Och **`modelSettings` är nycklad per modell-id**, så `effortLevel` slutade gälla i tysthet
+  när modellen byttes – det gäller oavsett väg till modellen.
 
-  **`settings.json` är ospårad med flit** (`.gitignore` rad 45: den bär projektnamnet och
-  hemkatalogens sökväg), så det finns ingen `git checkout` att backa med. Kopian före
-  ändringen heter `settings.json.bak-2026-10-03`. `settings.example.json` är den committade
-  spegeln och fick samma regionändring.
+  **`settings.json` är ospårad med flit** (`.gitignore` rad 45: den bär hemkatalogens
+  sökväg), så det finns ingen `git checkout` att backa med – ta en kopia före varje ändring.
+  `settings.example.json` är den committade spegeln.
 
 **Allt annat som går att lägga i repot ligger i repot** – det är regeln, uttryckligen begärd
 2026-08-26, och den gäller framåt: hamnar en ny projektinställning i en konfigkatalog ska den
-flyttas hit i stället. Undantagna är Vertex-variablerna, `claudeMdExcludes`, sedan
+flyttas hit i stället. Undantagna är `claudeMdExcludes`, sedan
 2026-08-28 **SessionStart-hooken** och **statusraden** nedan, och sedan 2026-09-05
 **gh-isoleringen** ovan – den svarar ja på bägge undantagsfrågorna, för `GH_CONFIG_DIR` bär
 hemkatalogens sökväg och arrangemanget ska gälla varje privat repo. Tokenfilen är dessutom det
@@ -638,7 +648,7 @@ Svaras nej på bägge hör den hemma i repot.
   budget här för talet att betyda något mot. Ett larm vars jämförelse är påhittad är precis vad
   versionssegmentet redan lärt ut. Siffran finns för att kastas ett öga på, inte för att lyda.
 
-  Värt att veta om vad den mäter: inferensen går genom Vertex, så det här är Claude Codes egen
+  Värt att veta om vad den mäter: inferensen går genom jobbets gateway, så det här är Claude Codes egen
   uppskattning ur tokens och en prislista – formen på en sessions förbrukning, inte en faktura.
 
   **Ett segment till är tyst när allt är i sin ordning, och det är enda stället där det är
